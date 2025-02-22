@@ -3,17 +3,18 @@ import React from "react";
 import { DB } from "@op-engineering/op-sqlite";
 
 import { TABLENAMES } from "../constants";
-import { PeriodStatusEntry } from "../types";
+import { PeriodDateEntry } from "../types";
 import PeriodHistorySimple from "../components/PeriodHistorySimple";
 
 // TODO break out into multiple services once predictions & settings are implemented
 
 export const createTables = (db: DB) => {
-    const periodStatusQuery = `
-    CREATE TABLE IF NOT EXISTS ${TABLENAMES.periodStatus}
+    // removing status field for now bc rly just need whether period was on that day or not
+    // if support for spotting later, can easily backfill data
+    const periodDatesQuery = `
+    CREATE TABLE IF NOT EXISTS ${TABLENAMES.periodDates}
     (id INTEGER PRIMARY KEY AUTOINCREMENT, 
-    timeStamp date NOT NULL, 
-    status integer NOT NULL,
+    timeStamp TEXT NOT NULL UNIQUE, 
     );`;
 
     // const settingsQuery = `
@@ -32,23 +33,23 @@ export const createTables = (db: DB) => {
     //   );`;
 
     // op-sqlite allows for synchronous requests & there will only be a handful of tables
-    db.execute(periodStatusQuery)
+    db.execute(periodDatesQuery)
 }
 
 // TODO change to insert or update in next phase by date
-export const addPeriodStatusEntry = async (db: DB, entry: PeriodStatusEntry) => {
-    const query = `INSERT INTO ${TABLENAMES.periodStatus} 
-    (timeStamp, status)
-    VALUES (${entry.timeStamp.toLocaleDateString()}, ${entry.status})`
+export const addPeriodDateEntry = async (db: DB, entry: PeriodDateEntry) => {
+    const query = `INSERT INTO ${TABLENAMES.periodDates} 
+    (timeStamp)
+    VALUES (${entry.timeStamp.toLocaleDateString()})`
 
     await db.execute(query)
 }
 
-export const getAllPeriodStatusEntries = async (db: DB) => {
-    const query = `SELECT id, timeStamp, status FROM ${TABLENAMES.periodStatus}`
+export const getAllPeriodDateEntries = async (db: DB) => {
+    const query = `SELECT id, timeStamp, status FROM ${TABLENAMES.periodDates}`
 }
 
-export const deleteAllPeriodStatusEntries = async (db: DB) => {
-    const query = `DELETE FROM ${TABLENAMES.periodStatus}`;
+export const deleteAllPeriodDateEntries = async (db: DB) => {
+    const query = `DELETE FROM ${TABLENAMES.periodDates}`;
     await db.execute(query);
 }

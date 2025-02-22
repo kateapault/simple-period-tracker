@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, Button, FlatList, } from 'react-native';
 
-import { getAllPeriodStatusEntries } from '../services/dbService';
-import { PeriodStatusEntry } from '../types';
+import { getAllPeriodDateEntries } from '../services/dbService';
+import { PeriodDateEntry } from '../types';
 
 type EntryProps = {
     status: string,
@@ -10,7 +10,7 @@ type EntryProps = {
 }
 
 type PeriodHistorySimpleProps = {
-    entries: PeriodStatusEntry[] | null,
+    entries: PeriodDateEntry[] | null,
 }
 
 

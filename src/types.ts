@@ -4,16 +4,15 @@ export type TestEntry = {
 }
 
 
-export type PeriodStatusEntry = {
-    status: number, // 1 for period; not in table otherise. or make one str of options for spotting?
+export type PeriodDateEntry = {
     timeStamp: Date, 
-    // sqlite has no Date or Datetime type
+    // sqlite has no Date or Datetime type so stored as text
     // .toLocaleDateString() should be called before db entries
     // TODO enforce this better / add validation
 }
 
-export type PredictedPeriodStatusEntry = {
-    timeStamp: Date,
+export type PredictedPeriodDateEntry = {
+    timeStamp: Date, // see note for PeriodDateEntry
     predictedStatus: string,
     actualStatus: string, //nullable in db
 }

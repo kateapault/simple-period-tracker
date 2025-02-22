@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, Button,} from 'react-native';
 
-import { addPeriodStatusEntry } from '../services/dbService';
-import { PeriodStatusEntry } from '../types';
+import { addPeriodDateEntry } from '../services/dbService';
+import { PeriodDateEntry } from '../types';
 
 type PeriodStatusProps = {
     setNewPeriodStatus: Function,

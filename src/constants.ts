@@ -6,13 +6,13 @@ export const PAGE = {
 
 
 export const STATUS = {
-    ON_PERIOD: true,
-    OFF_PERIOD: false
+    onPeriod: true,
+    offPeriod: false
 }
 
 
 export const TABLENAMES = {
-    periodStatus: "periodStatus",
+    periodDates: "periodDates",
     settings: "settings",
-    predictedStatus: "predictedStatus"
+    predictedStatus: "predictedPeriodDates"
 }
