@@ -2,8 +2,8 @@
 ## Current stage: V0.1
 
 ### Built with React Native and these libraries <3
-😊 [op-sqlite](https://github.com/OP-Engineering/op-sqlite#readme)
-😊 [react-native-calendars](https://github.com/wix/react-native-calendars#readme)
+- 😊 [op-sqlite](https://github.com/OP-Engineering/op-sqlite#readme)
+- 😊 [react-native-calendars](https://github.com/wix/react-native-calendars#readme)
 
 
 ## What
@@ -45,7 +45,7 @@ pretty it up and package it
 
 To clone the project and get it ready, run:
 ```sh
-# git clone line here once I set up the repo
+git clone https://github.com/kateapault/simple-period-tracker.git
 cd SimplePeriodTracker
 #npm
 npm install
