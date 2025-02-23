@@ -6,7 +6,7 @@ import { ISODateString, PeriodDateUpdate } from '../types';
 
 type DataBoxProps = {
     onDateEditClose: Function,
-    setNewPeriodStatus: Function,
+    updatePeriodDateStatus: Function,
     dateToEdit?: PeriodDateUpdate,
 }
 
@@ -39,8 +39,8 @@ const DataBox = (props: DataBoxProps) => {
                 {
                     props.dateToEdit ? 
                     <SingleDateEditModal 
-                        dateUpdate={props.dateToEdit}
-                        setNewPeriodStatus={props.setNewPeriodStatus}
+                        dateToEdit={props.dateToEdit}
+                        updatePeriodDateStatus={props.updatePeriodDateStatus}
                         onCancel={props.onDateEditClose}
                     />
                     : <></>

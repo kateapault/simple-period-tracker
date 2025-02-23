@@ -4,11 +4,11 @@ import { Dayjs } from 'dayjs';
 
 import { updatePeriodStatusForDate } from '../services/dbService';
 import { ISODateString, PeriodDateEntry, PeriodDateUpdate } from '../types';
-import { formatDateAsISOString } from '../utils';
+import { formatDateAsISOString } from '../utils/utils';
 import dayjs from 'dayjs';
 
 type PeriodStatusProps = {
-    setNewPeriodStatus: Function,
+    updatePeriodDateStatus: Function,
     onPeriod: boolean,
 }
 
@@ -16,7 +16,7 @@ const PeriodStatus = (props: PeriodStatusProps) => {
     
     const changePeriodStatus = async () => {
         const entry: PeriodDateUpdate = {status: !props.onPeriod, date: formatDateAsISOString(dayjs()) as ISODateString}
-        await props.setNewPeriodStatus(entry);
+        await props.updatePeriodDateStatus(entry);
     }
 
     return (

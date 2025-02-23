@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, Button, FlatList, } from 'react-native';
 import { Dayjs } from 'dayjs';
 
 import { getAllPeriodDateEntries } from '../services/dbService';
-import { PeriodDateEntry, ISODateString } from '../types';
+import { PeriodDateEntry, ISODateString, OverallPeriodStatistics } from '../types';
 
 type EntryProps = {
     status: string,
@@ -11,7 +11,9 @@ type EntryProps = {
 }
 
 type PeriodHistorySimpleProps = {
-    entries: PeriodDateEntry[] | null,
+    overallPeriodStatistics: OverallPeriodStatistics,
+    onPeriod: boolean,
+    periodDateEntries?: PeriodDateEntry[],
 }
 
 
@@ -23,21 +25,23 @@ type PeriodHistorySimpleProps = {
 //     )
 // }
 
-const PeriodHistorySimple = () => {
+const PeriodHistorySimple = (props: PeriodHistorySimpleProps) => {
+    const calculateNextStartDate = () => {
+        return 25
+    }
+
+    const calculateEndDate = () => {
+        return 2
+    }
+
+    // maybe separate out so below data only renders if there is a last period start date
 
     return (
         <View style={styles.container}>
-            <Text>last start & stop go here</Text>
-            <Text>probable days between period starts</Text>
-            {/* {
-                props.entries ? 
-                <FlatList 
-                    data={props.entries}
-                    renderItem={({item}) => <Entry status={item.status} timeStamp={item.timeStamp} />}
-                    keyExtractor={item => `${item.timeStamp}`}
-                />
-                : <Text>No data</Text>
-            } */}
+            <Text>Quick Stats</Text>
+            <Text>On average about {props.overallPeriodStatistics?.averageDaysBetweenPeriodStarts} days between the start of your periods</Text>
+            <Text>{props.overallPeriodStatistics?.lastPeriodStartDate ? `${calculateNextStartDate()} days until your next period probably starts` : `not enough data to predict next period start`}</Text>
+            <Text>{props.onPeriod ? `${calculateEndDate()} days left in your period` : ''}</Text>
         </View>
     )
 }

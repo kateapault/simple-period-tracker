@@ -37,3 +37,10 @@ export type CalendarEntry = {
 }
 
 
+export type OverallPeriodStatistics = {
+    totalPeriodsRecorded: number,
+    averagePeriodLength: number,
+    averageDaysBetweenPeriodStarts: number,
+    lastPeriodStartDate?: ISODateString,
+}
+

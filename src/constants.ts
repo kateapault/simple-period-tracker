@@ -1,3 +1,5 @@
+import { OverallPeriodStatistics } from "./types"
+
 export const PAGE = {
     HOME: "Home",
     MYDATA: "My Data",

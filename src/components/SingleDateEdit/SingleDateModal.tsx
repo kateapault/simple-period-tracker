@@ -3,15 +3,15 @@ import {StyleSheet, Text, View, Button,} from 'react-native';
 import { ISODateString, PeriodDateUpdate } from '../../types';
 
 type SingleDateEditModalProps = {
-    dateUpdate: PeriodDateUpdate,
-    setNewPeriodStatus: Function,
+    dateToEdit: PeriodDateUpdate,
+    updatePeriodDateStatus: Function,
     onCancel: Function,
 }
 
 const SingleDateEditModal = (props: SingleDateEditModalProps) => {
 
     const updateRecord = async (periodDateUpdate: PeriodDateUpdate) => {
-        await props.setNewPeriodStatus(periodDateUpdate);
+        await props.updatePeriodDateStatus(periodDateUpdate);
         props.onCancel();
     }
 
@@ -19,8 +19,8 @@ const SingleDateEditModal = (props: SingleDateEditModalProps) => {
         <View>
             <Text>single date edit</Text>
             <Button
-                onPress={async () => {await updateRecord(props.dateUpdate)}}
-                title={props.dateUpdate.status ? `Add record for ${props.dateUpdate.date}` : `Remove record for ${props.dateUpdate.date}`}
+                onPress={async () => {await updateRecord(props.dateToEdit)}}
+                title={props.dateToEdit.status ? `Add record for ${props.dateToEdit.date}` : `Remove record for ${props.dateToEdit.date}`}
             />
             <Button 
                 title="Cancel"

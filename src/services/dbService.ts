@@ -2,7 +2,7 @@ import React from "react";
 
 import { open, DB, QueryResult } from "@op-engineering/op-sqlite";
 
-import { formatDateAsISOString, convertISOStringToDate } from "../utils";
+import { formatDateAsISOString, convertISOStringToDate } from "../utils/utils";
 import { TABLENAMES } from "../constants";
 import { ISODateString, PeriodDateEntry, PeriodDateUpdate } from "../types";
 import PeriodHistorySimple from "../components/PeriodHistorySimple";
@@ -13,74 +13,103 @@ import PeriodHistorySimple from "../components/PeriodHistorySimple";
 // TODO look up how to use table name constants some other way
 // NOTE sqlite also seems to get angry when there's the integer primary key autoincrement in a table
 
-export const db = open({name: 'mydata.sqlite'})
+export const db = open({name: 'mytestdb.sqlite', location: 'db'})
 
 export const createTables = async (db: DB) => {
-    // removing status field for now bc rly just need whether period was on that day or not
-    // if support for spotting later, can easily backfill data
-    const periodDatesQuery = `
-    CREATE TABLE IF NOT EXISTS periodDates
-    (date TEXT NOT NULL UNIQUE);`;
-
-    // const settingsQuery = `
-    // CREATE TABLE IF NOT EXISTS ${TABLENAMES.settings}(
-    //     id INTEGER DEFAULT 1,
-    //     colorScheme varchar(500),
-    //     PRIMARY KEY (id)
-    // );`
-
-    // const predictionsQuery = `
-    // CREATE TABLE IF NOT EXISTS ${TABLENAMES.predictedStatus}(
-    //     date date NOT NULL UNIQUE,
-    //     predictedStatus varchar(255) NOT NULL,
-    //     actualStatus varchar(255),
-    //   );`;
-    await db.transaction( async tx => {
-        await tx.execute(periodDatesQuery);
-    })
+    try {
+        // removing status field for now bc rly just need whether period was on that day or not
+        // if support for spotting later, can easily backfill data
+        const periodDatesQuery = `
+        CREATE TABLE IF NOT EXISTS periodDates(
+            date TEXT NOT NULL UNIQUE
+        );`;
+        
+        
+        // const settingsQuery = `
+        // CREATE TABLE IF NOT EXISTS ${TABLENAMES.settings}(
+            //     id INTEGER DEFAULT 1,
+            //     colorScheme varchar(500),
+            //     PRIMARY KEY (id)
+            // );`
+            
+        // const predictionsQuery = `
+        // CREATE TABLE IF NOT EXISTS ${TABLENAMES.predictedStatus}(
+            //     date date NOT NULL UNIQUE,
+            //     predictedStatus varchar(255) NOT NULL,
+            //     actualStatus varchar(255),
+            //   );`;
+        // await db.transaction( async tx => {
+        //     await tx.execute(periodDatesQuery);
+        // })
+        await db.execute(periodDatesQuery)
+        console.log('tables created in db')
+    } catch(err) {
+        console.log(err)
+    }
 }
 
 
 export const updatePeriodStatusForDate = async (db: DB, entry: PeriodDateUpdate) => {
-    console.log('updating period status')
+    let query: string = ''
     if (entry.status) {
-        // if true then add date
+        // if true add entry
         console.log('adding status')
-        const query = `INSERT INTO periodDates (date) VALUES (?)`
-        await db.execute(query,[entry.date as string]);
+        query = `INSERT INTO periodDates (date) VALUES (?)`
     } else {
         // if false then remove entry
         console.log('removing status')
-        const query = `DELETE FROM periodDates 
-        WHERE date = ?`
+        query = `DELETE FROM periodDates WHERE date = ?`
+    }
+    try {
         await db.execute(query,[entry.date as string]);
+        console.log('update complete')
+    } catch(err) {
+        console.log(`updatePeriodStatusForDate: ${err}`)
     }
 }
 
-export const getAllPeriodDateEntries = async (db: DB): Promise<PeriodDateEntry[]> => {
+export const getAllPeriodDateEntries = async (db: DB, latestFirst: boolean = true): Promise<PeriodDateEntry[]> => {
     // returns in order most recent to furthest back
     console.log('gettingggg')
-    const query = `SELECT date 
-    FROM periodDates
-    ORDER BY date DESC`
+    let query: string
+    if (latestFirst) {
+        query = `SELECT date 
+        FROM periodDates
+        ORDER BY date DESC`
+    } else {
+        query = `SELECT date FROM periodDates`
+    }
+
     const entries: PeriodDateEntry[] = [];
-    const results = await db.execute(query)
-    console.log('queried')
-    if (results) {
-        results.rows.forEach((result) => {
-            for (let index = 0; index < results.rows.length; index++) {
-                const entry: PeriodDateEntry = {'date': result.date as ISODateString}
-                entries.push(entry)
-            }
-        });
+    try {
+        const results = await db.execute(query)
+        console.log('queried')
+        if (results) {
+            results.rows.forEach((result) => {
+                for (let index = 0; index < results.rows.length; index++) {
+                    const entry: PeriodDateEntry = {'date': result.date as ISODateString}
+                    entries.push(entry)
+                }
+            });
+        }
+    } catch(err) {
+        console.log(`getAllPeriodDateEntries: ${err}`)
     }
     console.log(entries)
     return entries
 }
 
 export const deleteAllPeriodDateEntries = async (db: DB) => {
-    // const query = `DELETE FROM periodDates`;
-    const query = `DROP TABLE periodDates`
-    await db.execute(query);
-    console.log('all entries deleted from periodDates')
+    try {
+        console.log('dropping entries..')
+        const query = `DELETE FROM periodDates`;
+        // console.log('dropping table....')
+        // const query = `DROP TABLE periodDates`
+        await db.transaction(async tx => {
+            await tx.execute(query)
+        });
+        console.log('all entries deleted from periodDates')
+    } catch(err) {
+        console.log(err)
+    }
 }

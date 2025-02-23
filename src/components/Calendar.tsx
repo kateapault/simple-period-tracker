@@ -3,10 +3,10 @@ import {StyleSheet, Text, View, Button,} from 'react-native';
 import { Calendar, CalendarList, DateData } from 'react-native-calendars';
 
 import { PeriodDateEntry, CalendarEntry, ISODateString, PeriodDateUpdate } from '../types';
-import { colors, formatDateAsISOString } from '../utils';
+import { colors, formatDateAsISOString } from '../utils/utils';
 
 type CalendarViewProps = {
-    entries: PeriodDateEntry[],
+    periodDateEntries: PeriodDateEntry[],
     setDateToEdit: Function,
 }
 
@@ -29,7 +29,7 @@ const CalendarView = (props: CalendarViewProps) => {
 
     const handleDatePress = (date: DateData) => {
         const dateEdit: PeriodDateUpdate = {
-            status: !(date.dateString in formatEntries(props.entries)),
+            status: !(date.dateString in formatEntries(props.periodDateEntries)),
             date: date.dateString as ISODateString,
         }
         props.setDateToEdit(dateEdit)
@@ -46,7 +46,7 @@ const CalendarView = (props: CalendarViewProps) => {
                 enableSwipeMonths={true} 
                 monthFormat={'MMM yyyy'}
                 markingType={'period'}
-                markedDates={formatEntries(props.entries)}
+                markedDates={formatEntries(props.periodDateEntries)}
                 onDayPress={handleDatePress}
             />
         </View>

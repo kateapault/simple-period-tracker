@@ -1,6 +1,6 @@
 import dayjs, {Dayjs} from "dayjs";
 
-import { ISODateString } from "./types";
+import { ISODateString } from "../types";
 
 export const colors = {
     red: 'red',

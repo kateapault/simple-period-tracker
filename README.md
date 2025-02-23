@@ -26,18 +26,23 @@ Please feel free to request/submit features. This first version is built around 
 [x] see period history in calendar view 
 
 #### V0.2
-[] Edit past dates in calendar
-[] Bulk add dates
+[x] Edit past dates in calendar
 [] show start of last period on home screen
 [] add simple predictive algorithm
 [] show predicted period dates on calendar view 
 [] show next predicted start and stop on home screen
 
 #### V0.3
-[] Add data wipe, add ability to transfer data to new device (may bump this out if it turns out to be v complicated), switch to encrypted db
+[] Bulk add dates
+[] Add data wipe
+[] add ability to transfer data to new device (may bump this out if it turns out to be v complicated)
+[] switch to encrypted db
 
 #### V0.4
-Make algorithm more accurate, add visual customization options, add accessibility features (for vision impaired & make compatible with screen reader, also look up what other accessibility features are out there)
+[] Make algorithm more accurate
+[] add visual customization options
+[] add accessibility features (for vision impaired & make compatible with screen reader
+[] also look up what other accessibility features are out there)
 
 #### V0.5 
 placeholder for anything else that needs doing that I'm forgetting rn
