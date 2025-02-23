@@ -4,7 +4,7 @@ import { open, DB, QueryResult } from "@op-engineering/op-sqlite";
 
 import { formatDateAsISOString, convertISOStringToDate } from "../utils";
 import { TABLENAMES } from "../constants";
-import { PeriodDateEntry, PeriodDateUpdate } from "../types";
+import { ISODateString, PeriodDateEntry, PeriodDateUpdate } from "../types";
 import PeriodHistorySimple from "../components/PeriodHistorySimple";
 
 // TODO break out into multiple services once predictions & settings are implemented
@@ -20,7 +20,7 @@ export const createTables = async (db: DB) => {
     // if support for spotting later, can easily backfill data
     const periodDatesQuery = `
     CREATE TABLE IF NOT EXISTS periodDates
-    (timeStamp TEXT NOT NULL UNIQUE);`;
+    (date TEXT NOT NULL UNIQUE);`;
 
     // const settingsQuery = `
     // CREATE TABLE IF NOT EXISTS ${TABLENAMES.settings}(
@@ -31,7 +31,7 @@ export const createTables = async (db: DB) => {
 
     // const predictionsQuery = `
     // CREATE TABLE IF NOT EXISTS ${TABLENAMES.predictedStatus}(
-    //     timeStamp date NOT NULL UNIQUE,
+    //     date date NOT NULL UNIQUE,
     //     predictedStatus varchar(255) NOT NULL,
     //     actualStatus varchar(255),
     //   );`;
@@ -44,34 +44,40 @@ export const createTables = async (db: DB) => {
 export const updatePeriodStatusForDate = async (db: DB, entry: PeriodDateUpdate) => {
     if (entry.status) {
         // if true then add date
-        const query = `INSERT INTO periodDates (timeStamp) VALUES (?)`
-        await db.execute(query,[formatDateAsISOString(entry.timeStamp)]);
+        const query = `INSERT INTO periodDates (date) VALUES (?)`
+        await db.execute(query,[entry.date]);
     } else {
         // if false then remove entry
         const query = `DELETE FROM periodDates 
-        WHERE timeStamp = ?`
-        await db.execute(query,[formatDateAsISOString(entry.timeStamp)]);
+        WHERE date = ?`
+        await db.execute(query,[entry.date]);
     }
 }
 
 export const getAllPeriodDateEntries = async (db: DB): Promise<PeriodDateEntry[]> => {
     // returns in order most recent to furthest back
-    const query = `SELECT timeStamp 
+    console.log('gettingggg')
+    const query = `SELECT date 
     FROM periodDates
-    ORDER BY timeStamp DESC`
+    ORDER BY date DESC`
     const entries: PeriodDateEntry[] = [];
     const results = await db.execute(query)
-    results.rows.forEach((result) => {
-        for (let index = 0; index < results.rows.length; index++) {
-            const entry: PeriodDateEntry = {'timeStamp': convertISOStringToDate(result.timeStamp)}
-            entries.push(entry)
-        }
-    });
+    console.log('queried')
+    if (results) {
+        results.rows.forEach((result) => {
+            for (let index = 0; index < results.rows.length; index++) {
+                const entry: PeriodDateEntry = {'date': result.date as ISODateString}
+                entries.push(entry)
+            }
+        });
+    }
+    console.log(entries)
     return entries
 }
 
 export const deleteAllPeriodDateEntries = async (db: DB) => {
-    const query = `DELETE FROM periodDates`;
+    // const query = `DELETE FROM periodDates`;
+    const query = `DROP TABLE periodDates`
     await db.execute(query);
     console.log('all entries deleted from periodDates')
 }

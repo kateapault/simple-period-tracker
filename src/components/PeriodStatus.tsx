@@ -3,7 +3,8 @@ import {StyleSheet, Text, View, Button,} from 'react-native';
 import { Dayjs } from 'dayjs';
 
 import { updatePeriodStatusForDate } from '../services/dbService';
-import { PeriodDateEntry, PeriodDateUpdate } from '../types';
+import { ISODateString, PeriodDateEntry, PeriodDateUpdate } from '../types';
+import { formatDateAsISOString } from '../utils';
 import dayjs from 'dayjs';
 
 type PeriodStatusProps = {
@@ -14,12 +15,13 @@ type PeriodStatusProps = {
 const PeriodStatus = (props: PeriodStatusProps) => {
     
     const changePeriodStatus = async () => {
-        const entry: PeriodDateUpdate = {status: !props.onPeriod, timeStamp: dayjs()}
+        const entry: PeriodDateUpdate = {status: !props.onPeriod, date: formatDateAsISOString(dayjs()) as ISODateString}
         await props.setNewPeriodStatus(entry);
     }
 
     return (
         <View style={styles.container}>
+            <Text>onPeriod {`${props.onPeriod}`}</Text>
             <Text>You are {props.onPeriod ? "on" : "not on"} on your period</Text>
             <Button
                 onPress={async () => {changePeriodStatus()}}

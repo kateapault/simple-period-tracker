@@ -3,11 +3,11 @@ import {StyleSheet, Text, View, Button, FlatList, } from 'react-native';
 import { Dayjs } from 'dayjs';
 
 import { getAllPeriodDateEntries } from '../services/dbService';
-import { PeriodDateEntry } from '../types';
+import { PeriodDateEntry, ISODateString } from '../types';
 
 type EntryProps = {
     status: string,
-    timeStamp: Dayjs,
+    date: ISODateString,
 }
 
 type PeriodHistorySimpleProps = {

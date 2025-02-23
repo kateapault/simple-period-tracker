@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 
 import { PAGE } from '../constants';
 import { PeriodDateEntry, PeriodDateUpdate } from '../types';
-import { formatDateAsISOString, isDateToday } from '../utils';
+import { formatDateAsISOString, isDateToday, isDateStringToday } from '../utils';
 
 import { getAllPeriodDateEntries, updatePeriodStatusForDate, deleteAllPeriodDateEntries } from '../services/dbService';
 
@@ -27,9 +27,11 @@ const BasePage = (props: BasePageProps) => {
         console.log('getting and setting')
         const periodDates = await getAllPeriodDateEntries(props.db);
         if (periodDates.length > 0){
+            console.log('entries found')
             setPeriodDateEntries(periodDates);
-            setOnPeriod(isDateToday(periodDates[0].timeStamp));
+            setOnPeriod(isDateStringToday(periodDates[0].date));
         } else {
+            console.log('no entries')
             setPeriodDateEntries([]);
             setOnPeriod(false);
         }
@@ -56,6 +58,7 @@ const BasePage = (props: BasePageProps) => {
         return (
             <View style={styles.container}>
                 <Header />
+                <Text>onPeriod {`${onPeriod}`}</Text>
                 <HomePage setNewPeriodStatus={updatePeriodDate} onPeriod={onPeriod}/>
                 <Button 
                     onPress={async () => {clearEntries()}}
@@ -68,7 +71,7 @@ const BasePage = (props: BasePageProps) => {
         return (
             <View style={styles.container}>
                 <Header />
-                <MyDataPage />
+                <MyDataPage entries={periodDateEntries}/>
                 <NavBar navigateTo={(page:string) => setCurrentPage(page)}/>
             </View>
         )
