@@ -6,13 +6,15 @@ import { getAllPeriodDateEntries } from "./dbService";
 
 
 // stats will be calculated at BasePage level & handed down
-export const getFormattedPeriodDatesForStats = (periodDateEntriesEarliestFirst: PeriodDateEntry[]) => {
-
+export const getFormattedPeriodDatesForStats = (periodDateEntries: PeriodDateEntry[]) => {
+    // if (periodDateEntries.length > 1 && dayjs(periodDateEntries[0].date).isBefore(dayjs(periodDateEntries[1].date))) {
+            // periodDateEntries.reverse()
+    // }
     const formattedPeriodDates: {[key: string]: number} = {}
     let currKey: string;
-    const len = periodDateEntriesEarliestFirst.length
-    periodDateEntriesEarliestFirst.forEach((entry, ind) => {
-        if (ind == 0 || !dayjs(periodDateEntriesEarliestFirst[ind-1].date).add(1,'day').isSame(dayjs(entry.date))) {
+    const len = periodDateEntries.length
+    periodDateEntries.forEach((entry, ind) => {
+        if (ind == 0 || !dayjs(periodDateEntries[ind-1].date).add(1,'day').isSame(dayjs(entry.date))) {
             // more efficient way of checking it...?
             currKey = entry.date as string
             formattedPeriodDates[currKey] = 1
@@ -46,7 +48,7 @@ export const calculateOverallPeriodStatistics = (formattedPeriodDates: {[key: st
                 fullPeriodsRecorded += 1
                 totalDaysLength += entry[1]
             }
-            console.log(`recorded starts ${recordedStarts} | totaldaysbetween ${totalDaysBetween} | laststartdate ${lastStartDate} | total days length ${totalDaysLength}`)
+            // console.log(`recorded starts ${recordedStarts} | totaldaysbetween ${totalDaysBetween} | laststartdate ${lastStartDate} | total days length ${totalDaysLength}`)
         })
         const avgDaysBetween = Math.round(totalDaysBetween / recordedStarts)
         const avgLength = Math.round(totalDaysLength / fullPeriodsRecorded)

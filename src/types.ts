@@ -1,3 +1,5 @@
+import { Dayjs } from "dayjs"
+
 // hacky but valid use case so idc
 // TODO MAYBE account for valid dates eg no 04-31
 type ValidDigit = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
@@ -8,8 +10,6 @@ type ValidDateString = '01' | '02' | '03' | '04' | '05' | '06' | '07' | '08' | '
 export type ISODateString = `${ValidYearString}-${ValidMonthString}-${ValidDateString}`
 // sqlite has no Date or Datetime type so stored as text
 // Calendar also uses YYYY-MM-DD strings so this is gonna be the validated thing
-// any date comparisons or date math will be handled by utils which will convert inside function
-
 
 
 // used to store entries from the db

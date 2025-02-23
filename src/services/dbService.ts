@@ -50,6 +50,10 @@ export const createTables = async (db: DB) => {
 
 
 export const updatePeriodStatusForDate = async (db: DB, entry: PeriodDateUpdate) => {
+    const tq = `SELECT COUNT(date) FROM periodDates`
+    const b = await db.execute(tq)
+    console.log(`# records before update=`)
+    console.log(b.rows)
     let query: string = ''
     if (entry.status) {
         // if true add entry
@@ -66,6 +70,9 @@ export const updatePeriodStatusForDate = async (db: DB, entry: PeriodDateUpdate)
     } catch(err) {
         console.log(`updatePeriodStatusForDate: ${err}`)
     }
+    const a = await db.execute(tq)
+    console.log(`# records after update=`)
+    console.log(a.rows)
 }
 
 export const getAllPeriodDateEntries = async (db: DB, latestFirst: boolean = true): Promise<PeriodDateEntry[]> => {
@@ -73,29 +80,25 @@ export const getAllPeriodDateEntries = async (db: DB, latestFirst: boolean = tru
     console.log('gettingggg')
     let query: string
     if (latestFirst) {
-        query = `SELECT date 
+        query = `SELECT * 
         FROM periodDates
         ORDER BY date DESC`
     } else {
-        query = `SELECT date FROM periodDates`
+        query = `SELECT * FROM periodDates`
     }
 
     const entries: PeriodDateEntry[] = [];
     try {
         const results = await db.execute(query)
-        console.log('queried')
         if (results) {
             results.rows.forEach((result) => {
-                for (let index = 0; index < results.rows.length; index++) {
-                    const entry: PeriodDateEntry = {'date': result.date as ISODateString}
-                    entries.push(entry)
-                }
+                const entry: PeriodDateEntry = {'date': result.date as ISODateString}
+                entries.push(entry)
             });
         }
     } catch(err) {
         console.log(`getAllPeriodDateEntries: ${err}`)
     }
-    console.log(entries)
     return entries
 }
 
