@@ -26,22 +26,28 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import BasePage from './src/views/BasePage';
-import {open} from '@op-engineering/op-sqlite';
-import { createTables } from './src/services/dbService';
-
-const db = open({name: 'mydatabase.sqlite'}); 
+import {DB} from '@op-engineering/op-sqlite';
+import { db } from './src/services/dbService';
+import { createTables, getAllPeriodDateEntries } from './src/services/dbService';
 
 function App(): React.JSX.Element {
-  createTables(db);
+  const startUp = async (db: DB) => {
+    await createTables(db);
+    console.log('tables created on startup')
+  }
 
-  // useEffect()
+  useEffect(() => {
+    startUp(db);
+    return () => {}
+  },[])
 
   return (
     <View>
-      <BasePage />
+      <BasePage db={db} />
     </View>
   );
 }
+//
 
 const styles = StyleSheet.create({
   sectionContainer: {

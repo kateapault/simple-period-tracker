@@ -1,29 +1,30 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, Button,} from 'react-native';
+import { Dayjs } from 'dayjs';
 
-import { addPeriodDateEntry } from '../services/dbService';
-import { PeriodDateEntry } from '../types';
+import { updatePeriodStatusForDate } from '../services/dbService';
+import { PeriodDateEntry, PeriodDateUpdate } from '../types';
+import dayjs from 'dayjs';
 
 type PeriodStatusProps = {
     setNewPeriodStatus: Function,
     onPeriod: boolean,
 }
 
-const PeriodStatus = () => {
-    // const [onPeriod, setOnPeriod] = useState(props.onPeriod)
-    const [onPeriod, setOnPeriod] = useState(false);
-    // console.log(`boolean in PeriodStatus component is ${props.onPeriod}`)
+const PeriodStatus = (props: PeriodStatusProps) => {
     
-    const setNewPeriodStatus = () => {
-        setOnPeriod(!onPeriod)
+    const changePeriodStatus = async () => {
+        const entry: PeriodDateUpdate = {status: !props.onPeriod, timeStamp: dayjs()}
+        await props.setNewPeriodStatus(entry);
     }
 
     return (
         <View style={styles.container}>
-            <Text>You are {onPeriod ? "on" : "not on"} on your period</Text>
+            <Text>props onPeriod {`${props.onPeriod}`}</Text>
+            <Text>You are {props.onPeriod ? "on" : "not on"} on your period</Text>
             <Button
-                onPress={async () => {setNewPeriodStatus()}}
-                title={onPeriod ? "It stopped": "IT STARTED"}
+                onPress={async () => {changePeriodStatus()}}
+                title={props.onPeriod ? "It stopped": "IT STARTED"}
             />
         </View>
     )

@@ -1,18 +1,28 @@
+import { Dayjs } from "dayjs"
+
+
 export type TestEntry = {
     value: string,
     id?: number
 }
 
-
+// used to store entries from the db
 export type PeriodDateEntry = {
-    timeStamp: Date, 
+    timeStamp: Dayjs, 
     // sqlite has no Date or Datetime type so stored as text
-    // .toLocaleDateString() should be called before db entries
-    // TODO enforce this better / add validation
+    // conversions between Date & string all happen in db service
 }
+
+// used to add/change record for date in db
+export type PeriodDateUpdate = {
+    status: boolean, // new status for that date
+    timeStamp: Dayjs, // see note for PeriodDateEntry
+}
+
 
 export type PredictedPeriodDateEntry = {
-    timeStamp: Date, // see note for PeriodDateEntry
+    timeStamp: Dayjs, // see note for PeriodDateEntry
     predictedStatus: string,
-    actualStatus: string, //nullable in db
+    actualStatus: string, // nullable in db
 }
+

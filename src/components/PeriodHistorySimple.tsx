@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, Button, FlatList, } from 'react-native';
+import { Dayjs } from 'dayjs';
 
 import { getAllPeriodDateEntries } from '../services/dbService';
 import { PeriodDateEntry } from '../types';
 
 type EntryProps = {
     status: string,
-    timeStamp: Date,
+    timeStamp: Dayjs,
 }
 
 type PeriodHistorySimpleProps = {
@@ -14,13 +15,13 @@ type PeriodHistorySimpleProps = {
 }
 
 
-const Entry = (props: EntryProps) => {
-    return (
-        <View>
-            <Text>{props.timeStamp.toLocaleTimeString()}: {props.status}</Text>
-        </View>
-    )
-}
+// const Entry = (props: EntryProps) => {
+//     return (
+//         <View>
+//             <Text>{props.timeStamp.toDateString()}: {props.status}</Text>
+//         </View>
+//     )
+// }
 
 const PeriodHistorySimple = () => {
 

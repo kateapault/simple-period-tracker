@@ -4,12 +4,17 @@ import {StyleSheet, Text, View, Button,} from 'react-native';
 import PeriodStatus from '../components/PeriodStatus';
 import PeriodHistorySimple from '../components/PeriodHistorySimple';
 
+type HomePageProps = {
+    setNewPeriodStatus: Function,
+    onPeriod: boolean,   
+}
 
-const HomePage = () => {
+const HomePage = (props: HomePageProps) => {
     return (
         <View style={styles.container}>
             <Text>home page</Text>
-            <PeriodStatus />
+            <Text>props onPeriod {`${props.onPeriod}`}</Text>
+            <PeriodStatus setNewPeriodStatus={props.setNewPeriodStatus} onPeriod={props.onPeriod}/>
             <PeriodHistorySimple />
         </View>
     )
