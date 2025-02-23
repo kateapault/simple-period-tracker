@@ -6,7 +6,6 @@
  */
 
 import React, {useState, useEffect, useCallback} from 'react';
-import type {PropsWithChildren} from 'react';
 import {
   ScrollView,
   StatusBar,
@@ -15,6 +14,7 @@ import {
   useColorScheme,
   View,
   Button,
+  SafeAreaView,
 } from 'react-native';
 
 import {
@@ -41,9 +41,9 @@ function App(): React.JSX.Element {
   },[])
 
   return (
-    <View>
+    <SafeAreaView>
       <BasePage db={db} />
-    </View>
+    </SafeAreaView>
   );
 }
 //

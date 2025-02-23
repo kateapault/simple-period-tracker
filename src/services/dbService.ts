@@ -42,15 +42,18 @@ export const createTables = async (db: DB) => {
 
 
 export const updatePeriodStatusForDate = async (db: DB, entry: PeriodDateUpdate) => {
+    console.log('updating period status')
     if (entry.status) {
         // if true then add date
+        console.log('adding status')
         const query = `INSERT INTO periodDates (date) VALUES (?)`
-        await db.execute(query,[entry.date]);
+        await db.execute(query,[entry.date as string]);
     } else {
         // if false then remove entry
+        console.log('removing status')
         const query = `DELETE FROM periodDates 
         WHERE date = ?`
-        await db.execute(query,[entry.date]);
+        await db.execute(query,[entry.date as string]);
     }
 }
 

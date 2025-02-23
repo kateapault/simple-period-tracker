@@ -1,18 +1,17 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, Button,} from 'react-native';
-import { Calendar, CalendarList } from 'react-native-calendars';
+import { Calendar, CalendarList, DateData } from 'react-native-calendars';
 
-import { PeriodDateEntry, CalendarEntry } from '../types';
+import { PeriodDateEntry, CalendarEntry, ISODateString, PeriodDateUpdate } from '../types';
 import { colors, formatDateAsISOString } from '../utils';
 
 type CalendarViewProps = {
     entries: PeriodDateEntry[],
+    setDateToEdit: Function,
 }
 
 const CalendarView = (props: CalendarViewProps) => {
     const formatEntries = (entries: PeriodDateEntry[]) => {
-        console.log('Calendar view')
-        console.log(entries)
         const formatted: {[k: string]: any} = {}
         if (entries?.length > 0) {
             entries.forEach((e) => {
@@ -27,7 +26,14 @@ const CalendarView = (props: CalendarViewProps) => {
         console.log(formatted)
         return formatted
     }
-    const [dates, setDates] = useState(formatEntries(props.entries))
+
+    const handleDatePress = (date: DateData) => {
+        const dateEdit: PeriodDateUpdate = {
+            status: !(date.dateString in formatEntries(props.entries)),
+            date: date.dateString as ISODateString,
+        }
+        props.setDateToEdit(dateEdit)
+    }
 
     // TODO PRETTY use onVisibleMonthsChange effect
     // TODO on tap of date, modal pops up - if period, 'remove period' else 'add period'
@@ -40,9 +46,9 @@ const CalendarView = (props: CalendarViewProps) => {
                 enableSwipeMonths={true} 
                 monthFormat={'MMM yyyy'}
                 markingType={'period'}
-                markedDates={dates}
+                markedDates={formatEntries(props.entries)}
+                onDayPress={handleDatePress}
             />
-            <Text>Add 'jump to month' picker (setCurrent)</Text>
         </View>
     )
 }
@@ -52,7 +58,6 @@ const styles = StyleSheet.create({
       color: "darkgrey",
       borderWidth: 1,
       borderColor: "black",
-      flex: 1,
     },
   })
 

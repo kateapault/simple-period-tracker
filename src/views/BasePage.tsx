@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View, Button,} from 'react-native';
+import {StyleSheet, Text, View, Button, Modal,} from 'react-native';
 import { DB } from '@op-engineering/op-sqlite';
 import dayjs from 'dayjs';
 
@@ -58,12 +58,12 @@ const BasePage = (props: BasePageProps) => {
         return (
             <View style={styles.container}>
                 <Header />
-                <Text>onPeriod {`${onPeriod}`}</Text>
-                <HomePage setNewPeriodStatus={updatePeriodDate} onPeriod={onPeriod}/>
                 <Button 
                     onPress={async () => {clearEntries()}}
                     title="clear table"
-                />
+                    />
+                <Text>onPeriod {`${onPeriod}`}</Text>
+                <HomePage setNewPeriodStatus={updatePeriodDate} onPeriod={onPeriod}/>
                 <NavBar navigateTo={(page:string) => setCurrentPage(page)}/>
             </View>
         )
@@ -71,7 +71,7 @@ const BasePage = (props: BasePageProps) => {
         return (
             <View style={styles.container}>
                 <Header />
-                <MyDataPage entries={periodDateEntries}/>
+                <MyDataPage entries={periodDateEntries} setNewPeriodStatus={updatePeriodDate}/>
                 <NavBar navigateTo={(page:string) => setCurrentPage(page)}/>
             </View>
         )
