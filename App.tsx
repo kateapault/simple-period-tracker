@@ -33,7 +33,6 @@ import { createTables, getAllPeriodDateEntries } from './src/services/dbService'
 function App(): React.JSX.Element {
   const startUp = async (db: DB) => {
     await createTables(db);
-    console.log('tables created on startup')
   }
 
   useEffect(() => {

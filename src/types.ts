@@ -1,11 +1,6 @@
 import { Dayjs } from "dayjs"
 
 
-export type TestEntry = {
-    value: string,
-    id?: number
-}
-
 // used to store entries from the db
 export type PeriodDateEntry = {
     timeStamp: Dayjs, 

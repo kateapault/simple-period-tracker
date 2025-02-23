@@ -20,7 +20,6 @@ const PeriodStatus = (props: PeriodStatusProps) => {
 
     return (
         <View style={styles.container}>
-            <Text>props onPeriod {`${props.onPeriod}`}</Text>
             <Text>You are {props.onPeriod ? "on" : "not on"} on your period</Text>
             <Button
                 onPress={async () => {changePeriodStatus()}}

@@ -12,8 +12,6 @@ type HomePageProps = {
 const HomePage = (props: HomePageProps) => {
     return (
         <View style={styles.container}>
-            <Text>home page</Text>
-            <Text>props onPeriod {`${props.onPeriod}`}</Text>
             <PeriodStatus setNewPeriodStatus={props.setNewPeriodStatus} onPeriod={props.onPeriod}/>
             <PeriodHistorySimple />
         </View>

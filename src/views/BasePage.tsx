@@ -26,31 +26,22 @@ const BasePage = (props: BasePageProps) => {
     const getAndSetData = async () => {
         console.log('getting and setting')
         const periodDates = await getAllPeriodDateEntries(props.db);
-        console.log(`period dates from get all ${periodDates}`)
         if (periodDates.length > 0){
             setPeriodDateEntries(periodDates);
-            console.log(`${periodDates}`)
-            console.log(`${periodDates[0]}`)
             setOnPeriod(isDateToday(periodDates[0].timeStamp));
-            console.log(`on period: ${onPeriod}`)
         } else {
             setPeriodDateEntries([]);
             setOnPeriod(false);
-            console.log('no data yet')
         }
         console.log('done getting and setting')
     }
 
     const updatePeriodDate = async (newUpdate: PeriodDateUpdate) => {
-        console.log('updating period date')
         await updatePeriodStatusForDate(props.db, newUpdate);
-        console.log('updated status in db')
         await getAndSetData();
-        console.log('got and set data')
     }
 
     const clearEntries = async () => {
-        console.log('clearing')
         await deleteAllPeriodDateEntries(props.db)
         await getAndSetData()
     }
@@ -66,10 +57,9 @@ const BasePage = (props: BasePageProps) => {
             <View style={styles.container}>
                 <Header />
                 <HomePage setNewPeriodStatus={updatePeriodDate} onPeriod={onPeriod}/>
-                <Text>{`${periodDateEntries}`}</Text>
                 <Button 
                     onPress={async () => {clearEntries()}}
-                    title="clear db"
+                    title="clear table"
                 />
                 <NavBar navigateTo={(page:string) => setCurrentPage(page)}/>
             </View>
