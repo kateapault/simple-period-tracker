@@ -11,36 +11,41 @@ export type ISODateString = `${ValidYearString}-${ValidMonthString}-${ValidDateS
 // sqlite has no Date or Datetime type so stored as text
 // Calendar also uses YYYY-MM-DD strings so this is gonna be the validated thing
 
+// NOTE ON DATES - where used with the Calendar, stored as ISODateString
+// everywhere else as Dayjs bc less conversion for calcs
 
 // used to store entries from the db
 export type PeriodDateEntry = {
-    date: ISODateString, 
+    date: Dayjs, 
 }
 
-// used to add/change record for date in db
+// used to submit request to add/change record for date in db
 export type PeriodDateUpdate = {
     status: boolean, // new status for that date
-    date: ISODateString,
+    date: ISODateString, 
 }
 
 
 export type PredictedPeriodDateEntry = {
-    date: ISODateString,
+    date: Dayjs,
     predictedStatus: string,
-    actualStatus: string, // nullable in db
+    actualStatus?: string, // nullable in db
 }
 
-export type CalendarEntry = {
-    date: ISODateString,
-    selected: boolean,
-    selectedColor: string,
+export type CalendarDateSettings = {
+    startingDay: true,
+    endingDay: true,
+    color: string,
+    textColor: string,
 }
+
+export type CalendarEntry = {[key: string]: CalendarDateSettings}
 
 
 export type OverallPeriodStatistics = {
     totalPeriodsRecorded: number,
     averagePeriodLength: number,
     averageDaysBetweenPeriodStarts: number,
-    lastPeriodStartDate?: ISODateString,
+    lastPeriodStartDate?: Dayjs,
 }
 

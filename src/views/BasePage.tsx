@@ -4,9 +4,9 @@ import { DB } from '@op-engineering/op-sqlite';
 import dayjs from 'dayjs';
 
 import { PAGE } from '../constants';
-import { PeriodDateEntry, PeriodDateUpdate, OverallPeriodStatistics } from '../types';
+import { PeriodDateEntry, PeriodDateUpdate, OverallPeriodStatistics, PredictedPeriodDateEntry } from '../types';
 import { formatDateAsISOString, isDateToday, isDateStringToday } from '../utils/utils';
-import { calculateOverallPeriodStatistics, getFormattedPeriodDatesForStats } from '../services/predictionService';
+import { calculateOverallPeriodStatistics, getFormattedPeriodDatesForStats, calculatePredictedDates } from '../services/predictionService';
 
 import { getAllPeriodDateEntries, updatePeriodStatusForDate, deleteAllPeriodDateEntries } from '../services/dbService';
 
@@ -26,17 +26,19 @@ const BasePage = (props: BasePageProps) => {
     // use default data to get initial predictions
     // TODO add something somewhere like "you don't have a lot of data yet, so the predictions are based off of common values. the predictions will get more accurate for you once you have more recorded"
     const [overallStats, setOverallStats] = useState<OverallPeriodStatistics>({totalPeriodsRecorded: 0, averagePeriodLength: 5, averageDaysBetweenPeriodStarts: 28})
+    const [predictedPeriodDates, setPredictedPeriodDates] = useState<PredictedPeriodDateEntry[]>([])
     // const [notEnoughData, setNotEnoughData] = useState<boolean>(false)
     // const [loading, setLoading] = useState<boolean>((periodDateEntries.length == 0 && !overallStats) || !notEnoughData)
 
     const setPredictions = async () => {
         console.log('calculating predictions')
         const entries = await getAllPeriodDateEntries(props.db, false);
-        // measure later if faster to call db vs reversing string; using this for now
-        // tbh unless someone has like over a decade of period data it'll be well under 1k records
+        // TODO measure later if faster to call db vs reversing string; using this for now
         const formattedDates = getFormattedPeriodDatesForStats(entries)
         const stats = await calculateOverallPeriodStatistics(formattedDates);
-        setOverallStats(stats)
+        setOverallStats(stats);
+        const predicted = await calculatePredictedDates(stats);
+        setPredictedPeriodDates(predicted);
     }
 
     const getAndSetData = async () => {
@@ -45,7 +47,7 @@ const BasePage = (props: BasePageProps) => {
         if (periodDates.length > 0){
             console.log('entries found')
             setPeriodDateEntries(periodDates);
-            setOnPeriod(isDateStringToday(periodDates[0].date));
+            setOnPeriod(isDateToday(periodDates[0].date));
 
         } else {
             console.log('no entries')
@@ -92,7 +94,11 @@ const BasePage = (props: BasePageProps) => {
         return (
             <View style={styles.container}>
                 <Header />
-                <MyDataPage periodDateEntries={periodDateEntries} updatePeriodDateStatus={updatePeriodDateStatus}/>
+                <MyDataPage 
+                    periodDateEntries={periodDateEntries} 
+                    updatePeriodDateStatus={updatePeriodDateStatus}
+                    predictedPeriodDates={predictedPeriodDates}
+                />
                 <NavBar navigateTo={(page:string) => setCurrentPage(page)}/>
             </View>
         )

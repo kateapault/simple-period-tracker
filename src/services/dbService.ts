@@ -1,5 +1,5 @@
 import React from "react";
-
+import dayjs from "dayjs";
 import { open, DB, QueryResult } from "@op-engineering/op-sqlite";
 
 import { formatDateAsISOString, convertISOStringToDate } from "../utils/utils";
@@ -31,7 +31,9 @@ export const createTables = async (db: DB) => {
             //     colorScheme varchar(500),
             //     PRIMARY KEY (id)
             // );`
-            
+        
+
+        // NOTE does this actually need to go in the db? useful to track actual vs predicted...?
         // const predictionsQuery = `
         // CREATE TABLE IF NOT EXISTS ${TABLENAMES.predictedStatus}(
             //     date date NOT NULL UNIQUE,
@@ -78,21 +80,16 @@ export const updatePeriodStatusForDate = async (db: DB, entry: PeriodDateUpdate)
 export const getAllPeriodDateEntries = async (db: DB, latestFirst: boolean = true): Promise<PeriodDateEntry[]> => {
     // returns in order most recent to furthest back
     console.log('gettingggg')
-    let query: string
+    let query: string = 'SELECT * FROM periodDates ORDER BY date'
     if (latestFirst) {
-        query = `SELECT * 
-        FROM periodDates
-        ORDER BY date DESC`
-    } else {
-        query = `SELECT * FROM periodDates`
+        query += ' DESC'
     }
-
     const entries: PeriodDateEntry[] = [];
     try {
         const results = await db.execute(query)
         if (results) {
             results.rows.forEach((result) => {
-                const entry: PeriodDateEntry = {'date': result.date as ISODateString}
+                const entry: PeriodDateEntry = {'date': dayjs(result.date as string)}
                 entries.push(entry)
             });
         }
@@ -106,8 +103,6 @@ export const deleteAllPeriodDateEntries = async (db: DB) => {
     try {
         console.log('dropping entries..')
         const query = `DELETE FROM periodDates`;
-        // console.log('dropping table....')
-        // const query = `DROP TABLE periodDates`
         await db.transaction(async tx => {
             await tx.execute(query)
         });

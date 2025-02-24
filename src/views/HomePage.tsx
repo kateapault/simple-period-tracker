@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {StyleSheet, Text, View, Button,} from 'react-native';
 
 import PeriodStatus from '../components/PeriodStatus';
@@ -15,7 +15,10 @@ const HomePage = (props: HomePageProps) => {
     return (
         <View style={styles.container}>
             <Text>onPeriod {`${props.onPeriod}`}</Text>
-            <PeriodStatus updatePeriodDateStatus={props.updatePeriodDateStatus} onPeriod={props.onPeriod}/>
+            <PeriodStatus 
+                updatePeriodDateStatus={props.updatePeriodDateStatus} 
+                onPeriod={props.onPeriod}
+            />
             <PeriodHistorySimple 
                 onPeriod={props.onPeriod}
                 overallPeriodStatistics={props.overallPeriodStatistics}

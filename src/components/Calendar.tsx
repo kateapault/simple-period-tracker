@@ -1,24 +1,29 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, Button,} from 'react-native';
 import { Calendar, CalendarList, DateData } from 'react-native-calendars';
+import dayjs from 'dayjs';
 
-import { PeriodDateEntry, CalendarEntry, ISODateString, PeriodDateUpdate } from '../types';
-import { colors, formatDateAsISOString } from '../utils/utils';
+import { COLORS } from '../constants';
+import { PeriodDateEntry, CalendarEntry, ISODateString, PeriodDateUpdate, PredictedPeriodDateEntry } from '../types';
+import { formatDateAsISOString } from '../utils/utils';
 
 type CalendarViewProps = {
     periodDateEntries: PeriodDateEntry[],
     setDateToEdit: Function,
+    predictedPeriodDates: PredictedPeriodDateEntry[],
 }
 
 const CalendarView = (props: CalendarViewProps) => {
-    const formatEntries = (entries: PeriodDateEntry[]) => {
+    const formatEntries = (entries: PeriodDateEntry[] | PredictedPeriodDateEntry[]): CalendarEntry => {
         const formatted: {[k: string]: any} = {}
         if (entries?.length > 0) {
+            const predicted = Object.hasOwn(entries[0] as object, 'predictedStatus')
+            console.log(entries[0], predicted)
             entries.forEach((e) => {
-                formatted[e.date] = {
+                formatted[formatDateAsISOString(e.date)] = {
                     startingDay: true,
                     endingDay: true,
-                    color: 'red',
+                    color: predicted ? COLORS.pink : COLORS.red,
                     textColor: 'white',
                 }
             })
@@ -46,8 +51,9 @@ const CalendarView = (props: CalendarViewProps) => {
                 enableSwipeMonths={true} 
                 monthFormat={'MMM yyyy'}
                 markingType={'period'}
-                markedDates={formatEntries(props.periodDateEntries)}
+                markedDates={{...formatEntries(props.periodDateEntries), ...formatEntries(props.predictedPeriodDates)}}
                 onDayPress={handleDatePress}
+                maxDate={formatDateAsISOString(dayjs())}
             />
         </View>
     )

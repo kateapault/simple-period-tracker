@@ -1,5 +1,10 @@
 import { OverallPeriodStatistics } from "./types"
 
+export const COLORS = {
+    red: 'red',
+    pink: 'pink',
+}
+
 export const PAGE = {
     HOME: "Home",
     MYDATA: "My Data",

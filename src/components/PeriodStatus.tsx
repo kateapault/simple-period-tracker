@@ -12,6 +12,8 @@ type PeriodStatusProps = {
     onPeriod: boolean,
 }
 
+// show days left in this section...?
+
 const PeriodStatus = (props: PeriodStatusProps) => {
     
     const changePeriodStatus = async () => {

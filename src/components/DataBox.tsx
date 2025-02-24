@@ -26,11 +26,8 @@ const DataBox = (props: DataBoxProps) => {
     if (bulkAddOpen) {
         return (
             <View>
-                <Text>Bulk add open</Text>
-                <Button
-                    onPress={onBulkAddClose}
-                    title="Close"
-                />
+                <Text>idk stats go here</Text>
+                <Text> probably tabs</Text>
             </View>
         )
     } else {

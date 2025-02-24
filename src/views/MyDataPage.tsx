@@ -1,15 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, View, Button, Modal, SafeAreaView} from 'react-native';
 import dayjs from 'dayjs';
 
 import CalendarView from '../components/Calendar';
-import { PeriodDateEntry, CalendarEntry, ISODateString, PeriodDateUpdate } from '../types';
+import { PeriodDateEntry, CalendarEntry, ISODateString, PeriodDateUpdate, PredictedPeriodDateEntry } from '../types';
 import BulkAddDatesModal from '../components/BulkAddDates/BulkAddDatesModal';
 import DataBox from '../components/DataBox';
 
 type MyDataPageProps = {
     periodDateEntries: PeriodDateEntry[],
     updatePeriodDateStatus: Function,
+    predictedPeriodDates: PredictedPeriodDateEntry[],
 }
 
 const MyDataPage = (props: MyDataPageProps) => {
@@ -26,7 +27,7 @@ const MyDataPage = (props: MyDataPageProps) => {
             <CalendarView 
                 periodDateEntries={props.periodDateEntries}
                 setDateToEdit={setDateToEdit}
-
+                predictedPeriodDates={props.predictedPeriodDates}
             />
             <DataBox 
                 dateToEdit={dateToEdit ? dateToEdit : undefined}

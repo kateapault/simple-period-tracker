@@ -2,10 +2,6 @@ import dayjs, {Dayjs} from "dayjs";
 
 import { ISODateString } from "../types";
 
-export const colors = {
-    red: 'red',
-}
-
 export const formatDateAsISOString = (date: Dayjs) => {
     // ISO | YYYY-MM-DD
     const isoString = date.format();
@@ -23,12 +19,7 @@ export const convertISOStringToDate = (isostr: ISODateString) => {
 
 
 export const isDateToday = (date: Dayjs) => {
-    const today = dayjs()
-    return (
-        date.year() == today.year() 
-        && date.month() == today.month()
-        && date.date() == today.date()
-    )
+    return date.isSame(dayjs(),'day')
 }
 
 export const isDateStringToday = (date: ISODateString) => {
