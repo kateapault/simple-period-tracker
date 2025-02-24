@@ -62,7 +62,7 @@ const BasePage = (props: BasePageProps) => {
         await getAndSetData();
     }
 
-    const clearEntries = async () => {
+    const deleteAllPeriodData = async () => {
         await deleteAllPeriodDateEntries(props.db)
         await getAndSetData()
     }
@@ -78,11 +78,6 @@ const BasePage = (props: BasePageProps) => {
         return (
             <View style={styles.container}>
                 <Header />
-                <Button 
-                    onPress={async () => {clearEntries()}}
-                    title="clear table"
-                    />
-                <Text>onPeriod {`${onPeriod}`}</Text>
                 <HomePage 
                     updatePeriodDateStatus={updatePeriodDateStatus} onPeriod={onPeriod}
                     overallPeriodStatistics={overallStats}
@@ -98,6 +93,7 @@ const BasePage = (props: BasePageProps) => {
                     periodDateEntries={periodDateEntries} 
                     updatePeriodDateStatus={updatePeriodDateStatus}
                     predictedPeriodDates={predictedPeriodDates}
+                    deleteAllPeriodData={deleteAllPeriodData}
                 />
                 <NavBar navigateTo={(page:string) => setCurrentPage(page)}/>
             </View>

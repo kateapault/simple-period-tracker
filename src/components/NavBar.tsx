@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, Button,} from 'react-native';
+import {StyleSheet, Text, View, Button, TouchableOpacity,} from 'react-native';
 
 import { PAGE } from '../constants';
 
@@ -19,9 +19,9 @@ const NavBarButton = (props: NavBarButtonProps) => {
     }
 
     return (
-        <View style={styles.navButton}>
-            <Text style={styles.navButtonLabel} onPress={()=>{pressed()}}>{props.label}</Text>
-        </View>
+        <TouchableOpacity style={styles.navButton} onPress={()=>{pressed()}}>
+            <Text style={styles.navButtonLabel}>{props.label}</Text>
+        </TouchableOpacity>
     )
 }
 

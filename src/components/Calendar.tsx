@@ -55,6 +55,9 @@ const CalendarView = (props: CalendarViewProps) => {
                 onDayPress={handleDatePress}
                 maxDate={formatDateAsISOString(dayjs())}
             />
+            <View>
+
+            </View>
         </View>
     )
 }

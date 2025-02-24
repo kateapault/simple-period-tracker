@@ -5,21 +5,26 @@ export const COLORS = {
     pink: 'pink',
 }
 
+export const DATABOX_TAB_TITLES = {
+    MYDATA: "My Data",
+    OTHER: "Other",
+}
+
 export const PAGE = {
     HOME: "Home",
     MYDATA: "My Data",
-    ERROR: "Error"
+    ERROR: "Error",
 }
 
 
 export const STATUS = {
     onPeriod: true,
-    offPeriod: false
+    offPeriod: false,
 }
 
 
 export const TABLENAMES = {
     periodDates: "periodDates",
     settings: "settings",
-    predictedStatus: "predictedPeriodDates"
+    predictedStatus: "predictedPeriodDates",
 }

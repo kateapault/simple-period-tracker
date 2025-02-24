@@ -5,12 +5,13 @@ import dayjs from 'dayjs';
 import CalendarView from '../components/Calendar';
 import { PeriodDateEntry, CalendarEntry, ISODateString, PeriodDateUpdate, PredictedPeriodDateEntry } from '../types';
 import BulkAddDatesModal from '../components/BulkAddDates/BulkAddDatesModal';
-import DataBox from '../components/DataBox';
+import DataBox from '../components/DataBox/DataBox';
 
 type MyDataPageProps = {
     periodDateEntries: PeriodDateEntry[],
     updatePeriodDateStatus: Function,
     predictedPeriodDates: PredictedPeriodDateEntry[],
+    deleteAllPeriodData: Function,
 }
 
 const MyDataPage = (props: MyDataPageProps) => {
@@ -22,8 +23,6 @@ const MyDataPage = (props: MyDataPageProps) => {
 
     return (
         <View style={styles.container}>
-            <Text>my data page</Text>
-            <Text>{dateToEdit?.date}</Text>
             <CalendarView 
                 periodDateEntries={props.periodDateEntries}
                 setDateToEdit={setDateToEdit}
@@ -33,6 +32,7 @@ const MyDataPage = (props: MyDataPageProps) => {
                 dateToEdit={dateToEdit ? dateToEdit : undefined}
                 onDateEditClose={onDateEditClose}
                 updatePeriodDateStatus={props.updatePeriodDateStatus}
+                deleteAllPeriodData={props.deleteAllPeriodData}
             />
         </View>
     )
@@ -42,6 +42,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 10,
         padding: 5,
+        display: "flex",
+        flexDirection: "column",
       },
 })
 

@@ -1,5 +1,5 @@
 # Simple Period Tracker
-## Current stage: V0.2
+## Current stage: V0.3
 
 ### Built with React Native and these libraries <3
 - 😊 [op-sqlite](https://github.com/OP-Engineering/op-sqlite#readme)
@@ -27,13 +27,11 @@ Please feel free to request/submit features. This first version is built around 
 
 #### V0.2
 [x] Edit past dates in calendar
-[] show start of last period on home screen
-[] add simple predictive algorithm
-[] show predicted period dates on calendar view 
-[] show next predicted start and stop on home screen
+[x] add simple predictive algorithm
+[x] show predicted period dates on calendar view 
+[x] show next predicted start and stop on home screen
 
 #### V0.3
-[] Bulk add dates
 [] Add data wipe
 [] add ability to transfer data to new device (may bump this out if it turns out to be v complicated)
 [] switch to encrypted db
@@ -45,6 +43,7 @@ Please feel free to request/submit features. This first version is built around 
 [] also look up what other accessibility features are out there)
 
 #### V0.5 
+[] Bulk add dates ?
 placeholder for anything else that needs doing that I'm forgetting rn
 
 #### V1.0
