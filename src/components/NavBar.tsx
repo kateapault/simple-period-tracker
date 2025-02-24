@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, Button, TouchableOpacity,} from 'react-native';
 
-import { PAGE } from '../constants';
+import { PAGE, COLORS } from '../constants';
+import { AppText } from './elements/AppText';
 
 type NavBarProps = {
     navigateTo: Function,
@@ -20,7 +21,11 @@ const NavBarButton = (props: NavBarButtonProps) => {
 
     return (
         <TouchableOpacity style={styles.navButton} onPress={()=>{pressed()}}>
-            <Text style={styles.navButtonLabel}>{props.label}</Text>
+                <AppText>
+            <Text style={styles.navButtonLabel}>
+                    {props.label}
+            </Text>
+                </AppText>
         </TouchableOpacity>
     )
 }
@@ -45,15 +50,18 @@ const styles = StyleSheet.create({
     },
     navButton: {
         flex: 1,
-        borderColor: "green",
+        borderColor: COLORS.lightpink,
         borderWidth: 2,
         justifyContent: "center",
+        backgroundColor: COLORS.lightest,
     },
     navButtonLabel: {
         textAlign: "center",
         textAlignVertical: "center",
         height: "100%",
         width: "100%",
+        fontSize: 20,
+        color: COLORS.darkest,
     },
 })
 

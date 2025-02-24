@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, Button, Modal,} from 'react-native';
 import { DB } from '@op-engineering/op-sqlite';
 import dayjs from 'dayjs';
 
-import { PAGE } from '../constants';
+import { PAGE, COLORS } from '../constants';
 import { PeriodDateEntry, PeriodDateUpdate, OverallPeriodStatistics, PredictedPeriodDateEntry } from '../types';
 import { formatDateAsISOString, isDateToday, isDateStringToday } from '../utils/utils';
 import { calculateOverallPeriodStatistics, getFormattedPeriodDatesForStats, calculatePredictedDates } from '../services/predictionService';
@@ -114,6 +114,8 @@ const styles = StyleSheet.create({
     container: {
       height: "100%",
       alignContent: "space-between",
+      backgroundColor: COLORS.darkest,
+      color: COLORS.lightest,
     },
 });
 

@@ -1,8 +1,14 @@
 import { OverallPeriodStatistics } from "./types"
 
 export const COLORS = {
-    red: 'red',
-    pink: 'pink',
+    // red: 'red',
+    // pink: 'pink',
+    darkest: '#330000',
+    red: '#920317',
+    lightred: '#a83545',
+    pink: '#be6874',
+    lightpink: '#d39aa2',
+    lightest: '#e9cdd1',
 }
 
 export const DATABOX_TAB_TITLES = {
@@ -11,8 +17,8 @@ export const DATABOX_TAB_TITLES = {
 }
 
 export const PAGE = {
-    HOME: "Home",
-    MYDATA: "My Data",
+    HOME: "HOME",
+    MYDATA: "MY DATA",
     ERROR: "Error",
 }
 
