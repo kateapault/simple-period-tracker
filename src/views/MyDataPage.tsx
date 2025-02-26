@@ -12,6 +12,7 @@ type MyDataPageProps = {
     updatePeriodDateStatus: Function,
     predictedPeriodDates: PredictedPeriodDateEntry[],
     deleteAllPeriodData: Function,
+    calendarEntries: CalendarEntry,
 }
 
 const MyDataPage = (props: MyDataPageProps) => {
@@ -27,6 +28,7 @@ const MyDataPage = (props: MyDataPageProps) => {
                 periodDateEntries={props.periodDateEntries}
                 setDateToEdit={setDateToEdit}
                 predictedPeriodDates={props.predictedPeriodDates}
+                calendarEntries={props.calendarEntries}
             />
             <DataBox 
                 dateToEdit={dateToEdit ? dateToEdit : undefined}

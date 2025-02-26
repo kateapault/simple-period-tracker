@@ -10,13 +10,13 @@ import { AppText } from './elements/AppText';
 import CustomButton from './elements/CustomButton';
 
 type CalendarViewProps = {
+    calendarEntries: CalendarEntry,
     periodDateEntries: PeriodDateEntry[],
     setDateToEdit: Function,
     predictedPeriodDates: PredictedPeriodDateEntry[],
 }
 
 const CalendarView = (props: CalendarViewProps) => {
-    const [jumpToDate, setJumpToDate] = useState<string | undefined>(formatDateAsISOString(dayjs()))
     const formatEntries = (entries: PeriodDateEntry[] | PredictedPeriodDateEntry[]): CalendarEntry => {
         const formatted: {[k: string]: any} = {}
         if (entries?.length > 0) {
@@ -54,17 +54,11 @@ const CalendarView = (props: CalendarViewProps) => {
                 enableSwipeMonths={true} 
                 monthFormat={'MMM yyyy'}
                 markingType={'period'}
-                markedDates={{...formatEntries(props.periodDateEntries), ...formatEntries(props.predictedPeriodDates)}}
+                markedDates={props.calendarEntries}
                 onDayPress={handleDatePress}
                 maxDate={formatDateAsISOString(dayjs())}
-                initialDate={jumpToDate}
             />
             <View>
-                <CustomButton 
-                    type={BUTTONTYPES.neutralLight}
-                    title={'Jump to Current Month'}
-                    onPress={()=>{setJumpToDate(undefined);setJumpToDate(formatDateAsISOString(dayjs()))}}
-                />
             </View>
         </View>
     )

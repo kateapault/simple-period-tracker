@@ -4,7 +4,7 @@ import { DB } from '@op-engineering/op-sqlite';
 import dayjs from 'dayjs';
 
 import { PAGE, COLORS } from '../constants';
-import { PeriodDateEntry, PeriodDateUpdate, OverallPeriodStatistics, PredictedPeriodDateEntry } from '../types';
+import { PeriodDateEntry, PeriodDateUpdate, OverallPeriodStatistics, PredictedPeriodDateEntry, CalendarEntry } from '../types';
 import { formatDateAsISOString, isDateToday, isDateStringToday } from '../utils/utils';
 import { calculateOverallPeriodStatistics, getFormattedPeriodDatesForStats, calculatePredictedDates } from '../services/predictionService';
 
@@ -27,6 +27,7 @@ const BasePage = (props: BasePageProps) => {
     // TODO add something somewhere like "you don't have a lot of data yet, so the predictions are based off of common values. the predictions will get more accurate for you once you have more recorded"
     const [overallStats, setOverallStats] = useState<OverallPeriodStatistics>({totalPeriodsRecorded: 0, averagePeriodLength: 5, averageDaysBetweenPeriodStarts: 28})
     const [predictedPeriodDates, setPredictedPeriodDates] = useState<PredictedPeriodDateEntry[]>([])
+    const [calendarEntries, setCalendarEntries] = useState<CalendarEntry>({})
     // const [notEnoughData, setNotEnoughData] = useState<boolean>(false)
     // const [loading, setLoading] = useState<boolean>((periodDateEntries.length == 0 && !overallStats) || !notEnoughData)
 
@@ -41,14 +42,32 @@ const BasePage = (props: BasePageProps) => {
         setPredictedPeriodDates(predicted);
     }
 
+    const formatEntries = (entries: PeriodDateEntry[] | PredictedPeriodDateEntry[]): CalendarEntry => {
+        const formatted: {[k: string]: any} = {}
+        if (entries?.length > 0) {
+            const predicted = Object.hasOwn(entries[0] as object, 'predictedStatus')
+            console.log(entries[0], predicted)
+            entries.forEach((e) => {
+                formatted[formatDateAsISOString(e.date)] = {
+                    startingDay: true,
+                    endingDay: true,
+                    color: predicted ? COLORS.pink : COLORS.red,
+                    textColor: 'white',
+                }
+            })
+        }
+        console.log(formatted)
+        return formatted
+    }
+
     const getAndSetData = async () => {
         const periodDates = await getAllPeriodDateEntries(props.db);
-        await setPredictions();
         if (periodDates.length > 0){
             console.log('entries found')
+            await setPredictions();
             setPeriodDateEntries(periodDates);
             setOnPeriod(isDateToday(periodDates[0].date));
-
+            setCalendarEntries(formatEntries([...periodDates, ...predictedPeriodDates]))
         } else {
             console.log('no entries')
             setPeriodDateEntries([]);
@@ -94,6 +113,7 @@ const BasePage = (props: BasePageProps) => {
                     updatePeriodDateStatus={updatePeriodDateStatus}
                     predictedPeriodDates={predictedPeriodDates}
                     deleteAllPeriodData={deleteAllPeriodData}
+                    calendarEntries={calendarEntries}
                 />
                 <NavBar navigateTo={(page:string) => setCurrentPage(page)}/>
             </View>
@@ -114,7 +134,7 @@ const styles = StyleSheet.create({
     container: {
       height: "100%",
       alignContent: "space-between",
-      backgroundColor: 'white',
+      backgroundColor: COLORS.lightpink,
     },
 });
 

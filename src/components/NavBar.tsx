@@ -50,8 +50,9 @@ const styles = StyleSheet.create({
         flex: 1,
         borderColor: COLORS.lightpink,
         borderWidth: 2,
+        borderRadius: 12,
         justifyContent: "center",
-        backgroundColor: COLORS.white,
+        backgroundColor: COLORS.darkred,
     },
     navButtonLabel: {
         textAlign: "center",
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
         height: "100%",
         width: "100%",
         fontSize: 20,
-        color: COLORS.darkred,
+        color: COLORS.white,
     },
 })
 

@@ -77,7 +77,7 @@ const PeriodStatus = (props: PeriodStatusProps) => {
                 <CustomButton
                     type={props.onPeriod ? BUTTONTYPES.cancel : BUTTONTYPES.red}
                     onPress={async () => {changePeriodStatus()}}
-                    title={props.onPeriod ? "It stopped": "IT STARTED"}
+                    title={props.onPeriod ? "It stopped": "It started"}
                 />
             </View>
         </View>
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 40,
         borderColor: COLORS.lightpink,
-        backgroundColor: COLORS.lightpink,
+        backgroundColor: 'white',
         width: "80%",
         aspectRatio: "8/7",
         display: "flex",

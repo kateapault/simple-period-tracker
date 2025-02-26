@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     },
     cancel: {
         padding: 12,
-        backgroundColor: "grey",
+        backgroundColor: "lightgrey",
         borderWidth: 2,
         borderColor: "black",
         borderRadius: 8,
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     },
     red: {
         padding: 12,
-        backgroundColor: COLORS.lightred,
+        backgroundColor: COLORS.pink,
         borderWidth: 2,
         borderColor: COLORS.darkred,
         borderRadius: 8,

@@ -44,5 +44,9 @@ const styles = StyleSheet.create({
         fontFamily: 'AtkinsonHyperlegibleNextRegular',
         color: COLORS.white,
     },
+    bold: {
+        fontFamily: 'AtkinsonHyperlegibleNextBold',
+        color: COLORS.white,
+    }
 
 })

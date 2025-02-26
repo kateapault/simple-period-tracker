@@ -18,7 +18,7 @@ const Header = () => {
 const styles = StyleSheet.create({
     container: {
         height: 30,
-        borderBottomColor: 'white',
+        borderBottomColor: COLORS.lightpink,
         borderWidth: 1,
         flex: 1,
         alignItems: "center",
