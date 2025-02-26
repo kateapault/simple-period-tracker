@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, Button,} from 'react-native';
 import dayjs from 'dayjs';
 
 import { AppText } from './elements/AppText';
-import { formatDateAsTitleString } from '../utils/utils';
+import { formatDateAsTitleString } from '../utils/dateUtils';
 import { COLORS } from '../constants';
 
 

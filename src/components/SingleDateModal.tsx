@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, Button,} from 'react-native';
-import { ISODateString, PeriodDateUpdate } from '../../types';
+import { ISODateString, PeriodDateUpdate } from '../types';
 
 type SingleDateEditModalProps = {
     dateToEdit: PeriodDateUpdate,

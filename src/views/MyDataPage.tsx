@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, Button, Modal, SafeAreaView} from 'react-native'
 import dayjs from 'dayjs';
 
 import CalendarView from '../components/Calendar';
-import { PeriodDateEntry, CalendarEntry, ISODateString, PeriodDateUpdate, PredictedPeriodDateEntry } from '../types';
+import { PeriodDateEntry, CalendarDateEntries, ISODateString, PeriodDateUpdate, PredictedPeriodDateEntry } from '../types';
 import BulkAddDatesModal from '../components/BulkAddDates/BulkAddDatesModal';
 import DataBox from '../components/DataBox/DataBox';
 
@@ -12,7 +12,7 @@ type MyDataPageProps = {
     updatePeriodDateStatus: Function,
     predictedPeriodDates: PredictedPeriodDateEntry[],
     deleteAllPeriodData: Function,
-    calendarEntries: CalendarEntry,
+    calendarEntries: CalendarDateEntries,
 }
 
 const MyDataPage = (props: MyDataPageProps) => {

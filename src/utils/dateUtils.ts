@@ -1,7 +1,6 @@
 import dayjs, {Dayjs} from "dayjs";
 
 import { ISODateString } from "../types";
-import { DAYOFWEEK } from '../constants';
 
 export const formatDateAsISOString = (date: Dayjs) => {
     // ISO | YYYY-MM-DD
@@ -20,7 +19,6 @@ export const convertISOStringToDate = (isostr: ISODateString) => {
     return d
 }
 
-
 export const isDateToday = (date: Dayjs) => {
     return date.isSame(dayjs(),'day')
 }
@@ -29,3 +27,4 @@ export const isDateStringToday = (date: ISODateString) => {
     const today = formatDateAsISOString(dayjs())
     return today == date
 }
+

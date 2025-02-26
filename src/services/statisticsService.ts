@@ -1,7 +1,7 @@
 import { DB } from "@op-engineering/op-sqlite";
 import dayjs, {Dayjs, } from "dayjs"
 import { ISODateString, PeriodDateEntry, OverallPeriodStatistics, PredictedPeriodDateEntry } from "../types";
-import { formatDateAsISOString, isDateToday } from "../utils/utils";
+import { formatDateAsISOString, isDateToday } from "../utils/dateUtils";
 import { getAllPeriodDateEntries } from "./dbService";
 
 // stats will be calculated at BasePage level & handed down

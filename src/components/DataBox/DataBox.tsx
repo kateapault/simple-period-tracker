@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, Button,} from 'react-native';
 
 import { DATABOX_TAB_TITLES } from '../../constants';
 import CustomButton from '../elements/CustomButton';
-import SingleDateEditModal from '../SingleDateEdit/SingleDateModal';
+import SingleDateEditModal from '../SingleDateModal';
 import { ISODateString, PeriodDateUpdate } from '../../types';
 import MyDataTab from './MyDataTab';
 

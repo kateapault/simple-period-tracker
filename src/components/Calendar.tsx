@@ -4,40 +4,22 @@ import { Calendar, CalendarList, DateData } from 'react-native-calendars';
 import dayjs from 'dayjs';
 
 import { COLORS, BUTTONTYPES } from '../constants';
-import { PeriodDateEntry, CalendarEntry, ISODateString, PeriodDateUpdate, PredictedPeriodDateEntry } from '../types';
-import { formatDateAsISOString } from '../utils/utils';
+import { PeriodDateEntry, CalendarDateEntries, ISODateString, PeriodDateUpdate, PredictedPeriodDateEntry } from '../types';
+import { formatDateAsISOString } from '../utils/dateUtils';
 import { AppText } from './elements/AppText';
 import CustomButton from './elements/CustomButton';
 
 type CalendarViewProps = {
-    calendarEntries: CalendarEntry,
+    calendarEntries: CalendarDateEntries,
     periodDateEntries: PeriodDateEntry[],
     setDateToEdit: Function,
     predictedPeriodDates: PredictedPeriodDateEntry[],
 }
 
 const CalendarView = (props: CalendarViewProps) => {
-    const formatEntries = (entries: PeriodDateEntry[] | PredictedPeriodDateEntry[]): CalendarEntry => {
-        const formatted: {[k: string]: any} = {}
-        if (entries?.length > 0) {
-            const predicted = Object.hasOwn(entries[0] as object, 'predictedStatus')
-            console.log(entries[0], predicted)
-            entries.forEach((e) => {
-                formatted[formatDateAsISOString(e.date)] = {
-                    startingDay: true,
-                    endingDay: true,
-                    color: predicted ? COLORS.pink : COLORS.red,
-                    textColor: 'white',
-                }
-            })
-        }
-        console.log(formatted)
-        return formatted
-    }
-
     const handleDatePress = (date: DateData) => {
         const dateEdit: PeriodDateUpdate = {
-            status: !(date.dateString in formatEntries(props.periodDateEntries)),
+            status: !(date.dateString in props.calendarEntries),
             date: date.dateString as ISODateString,
         }
         props.setDateToEdit(dateEdit)

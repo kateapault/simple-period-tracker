@@ -2,7 +2,7 @@ import React from "react";
 import dayjs from "dayjs";
 import { open, DB, QueryResult } from "@op-engineering/op-sqlite";
 
-import { formatDateAsISOString, convertISOStringToDate } from "../utils/utils";
+import { formatDateAsISOString, convertISOStringToDate } from "../utils/dateUtils";
 import { TABLENAMES } from "../constants";
 import { ISODateString, PeriodDateEntry, PeriodDateUpdate } from "../types";
 import PeriodHistorySimple from "../components/PeriodHistorySimple";

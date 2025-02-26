@@ -39,7 +39,7 @@ export type CalendarDateSettings = {
     textColor: string,
 }
 
-export type CalendarEntry = {[key: string]: CalendarDateSettings}
+export type CalendarDateEntries = {[key: string]: CalendarDateSettings}
 
 
 export type OverallPeriodStatistics = {

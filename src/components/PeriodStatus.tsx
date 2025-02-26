@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import {StyleSheet, Text, View, Button,} from 'react-native';
 import dayjs, {Dayjs} from 'dayjs';
 
-import { updatePeriodStatusForDate } from '../services/dbService';
+import { getDaysLeftInPeriod, getDaysLeftInPeriodText, getDaysLeftTilNextPeriod, getDaysLeftTilNextPeriodText } from '../services/dateService';
 import { ISODateString, OverallPeriodStatistics, PeriodDateEntry, PeriodDateUpdate } from '../types';
-import { formatDateAsISOString } from '../utils/utils';
+import { formatDateAsISOString } from '../utils/dateUtils';
 import { AppHeaderText, AppText } from './elements/AppText';
 import CustomButton from './elements/CustomButton';
 import { COLORS, BUTTONTYPES } from '../constants';
@@ -19,43 +19,6 @@ type PeriodStatusProps = {
 // show days left in this section...?
 
 const PeriodStatus = (props: PeriodStatusProps) => {
-
-    const getDaysLeftInPeriod = () => {
-        if (props.overallPeriodStatistics.lastPeriodStartDate) {
-            const endDate = props.overallPeriodStatistics.lastPeriodStartDate.add(props.overallPeriodStatistics.averagePeriodLength)
-            return endDate.diff(dayjs(),'days')
-        }
-        return 0
-    }
-
-    const getDaysLeftInPeriodText = (diff: number) => {
-        return (diff > 0) ? `about ${diff} days left` : `today is probably the last day`
-    }
-
-    const getDaysLeftTilNextPeriod = () => {
-        if (props.overallPeriodStatistics.lastPeriodStartDate) {
-            console.log(props.overallPeriodStatistics.lastPeriodStartDate)
-            console.log(props.overallPeriodStatistics.averageDaysBetweenPeriodStarts)
-            const nextDate = props.overallPeriodStatistics.lastPeriodStartDate.add(props.overallPeriodStatistics.averageDaysBetweenPeriodStarts,'days')
-            return nextDate.diff(dayjs(),'days')
-        }
-        return 0
-    }
-
-    const getDaysLeftTilNextPeriodText = (diff: number) => {
-        if (diff == 0) {
-            return `your next period will probably start today`
-        } else if (diff == 1) {
-            return `your next period will probably start tomorrow`
-        } else {
-            return `your next period will probably start in ${diff} days`
-        }
-    }
-    
-    const changePeriodStatus = async () => {
-        const entry: PeriodDateUpdate = {status: !props.onPeriod, date: formatDateAsISOString(dayjs()) as ISODateString}
-        await props.updatePeriodDateStatus(entry);
-    }
 
     return (
         <View style={styles.container}>
@@ -72,11 +35,25 @@ const PeriodStatus = (props: PeriodStatusProps) => {
                     </Text>
                 </View>
                 <AppText>
-                    <Text style={styles.headsUp}>{props.onPeriod ? getDaysLeftInPeriodText(getDaysLeftInPeriod()) : getDaysLeftTilNextPeriodText(getDaysLeftTilNextPeriod())}</Text>
+                    <Text style={styles.headsUp}>{props.onPeriod ? 
+                        getDaysLeftInPeriodText(getDaysLeftInPeriod(
+                            props.overallPeriodStatistics.averagePeriodLength,
+                            props.overallPeriodStatistics.lastPeriodStartDate,
+                        )) : 
+                        getDaysLeftTilNextPeriodText(getDaysLeftTilNextPeriod(
+                            props.overallPeriodStatistics.averageDaysBetweenPeriodStarts,
+                            props.overallPeriodStatistics.lastPeriodStartDate,
+                        ))}</Text>
                 </AppText>
                 <CustomButton
                     type={props.onPeriod ? BUTTONTYPES.cancel : BUTTONTYPES.red}
-                    onPress={async () => {changePeriodStatus()}}
+                    onPress={async () => {props.updatePeriodDateStatus(
+                        // takes PeriodDateUpdate
+                        {
+                            status: !props.onPeriod,
+                            date: formatDateAsISOString(dayjs()),
+                        }
+                    )}}
                     title={props.onPeriod ? "It stopped": "It started"}
                 />
             </View>
