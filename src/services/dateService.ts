@@ -14,7 +14,7 @@ export const formatAsCalendarDateEntries = (entries: PeriodDateEntry[] | Predict
                 startingDay: true,
                 endingDay: true,
                 color: predicted ? COLORS.pink : COLORS.red,
-                textColor: 'white',
+                textColor: COLORS.white,
             }
         })
     }
@@ -24,7 +24,7 @@ export const formatAsCalendarDateEntries = (entries: PeriodDateEntry[] | Predict
 
 export const getDaysLeftInPeriod = (averagePeriodLength: number, lastStartDate?: Dayjs) => {
     if (lastStartDate) {
-        const endDate = lastStartDate.add(averagePeriodLength, 'days')
+        const endDate = lastStartDate.add(averagePeriodLength-1, 'days')
         return endDate.diff(dayjs(),'days')
     }
     return 0
@@ -43,7 +43,7 @@ export const getDaysLeftTilNextPeriod = (averageDaysBetweenStarts: number, lastS
 }
 
 export const getDaysLeftTilNextPeriodText = (diff: number) => {
-    if (diff == 0) {
+    if (diff >= 0) {
         return `your next period will probably start today`
     } else if (diff == 1) {
         return `your next period will probably start tomorrow`
