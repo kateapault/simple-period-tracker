@@ -1,5 +1,4 @@
 # Simple Period Tracker
-## Current stage: V0.3
 
 ### Built with React Native and these libraries <3
 - 😊 [op-sqlite](https://github.com/OP-Engineering/op-sqlite#readme)
@@ -32,22 +31,30 @@ Please feel free to request/submit features. This first version is built around 
 [x] show next predicted start and stop on home screen
 
 #### V0.3
-[] Add data wipe
+[x] Add data wipe
 [] add ability to transfer data to new device (may bump this out if it turns out to be v complicated)
 [] switch to encrypted db
+[] add unit tests
+
+#### Concurrently: conducting user interviews and recruiting test users
 
 #### V0.4
 [] Make algorithm more accurate
-[] add visual customization options
 [] add accessibility features (for vision impaired & make compatible with screen reader
 [] also look up what other accessibility features are out there)
+[] styling
+[] package & upload to Google Play & Apple Store for test users to try
 
 #### V0.5 
+[] add features from user interviews / user feedback
 [] Bulk add dates ?
+[] add visual customization options
 placeholder for anything else that needs doing that I'm forgetting rn
 
+#### ...
+
 #### V1.0
-pretty it up and package it
+Release for general use
 
 
 
