@@ -12,6 +12,22 @@
     {
       "path": "assets/fonts/ArvoRegular.ttf",
       "sha1": "3857248afcedf01b6e9dc0048f4ca662bc328493"
+    },
+    {
+      "path": "assets/fonts/AtkinsonHyperlegibleNextBold.ttf",
+      "sha1": "f6629d07bf05ff3bb4e423c862131fbfbdcfa013"
+    },
+    {
+      "path": "assets/fonts/AtkinsonHyperlegibleNextItalic.ttf",
+      "sha1": "93a0d1285670ad13588394147240c6df34434b91"
+    },
+    {
+      "path": "assets/fonts/AtkinsonHyperlegibleNextRegular.ttf",
+      "sha1": "0c622decee7d37aea6ac1b6dac1b1e6d7c2813fc"
+    },
+    {
+      "path": "assets/fonts/AtkinsonHyperlegibleNextSemiBold.ttf",
+      "sha1": "246d9bd8f3e92178941f766b779c2b44bf00d8bc"
     }
   ]
 }

@@ -1,8 +1,10 @@
 import React from 'react';
 import {StyleSheet, Text, View, Button,} from 'react-native';
+import { Dayjs } from 'dayjs';
 
 import PeriodStatus from '../components/PeriodStatus';
 import PeriodHistorySimple from '../components/PeriodHistorySimple';
+import HomeHeader from '../components/HomeHeader';
 import { OverallPeriodStatistics } from '../types';
 
 type HomePageProps = {
@@ -17,11 +19,12 @@ const HomePage = (props: HomePageProps) => {
             <PeriodStatus 
                 updatePeriodDateStatus={props.updatePeriodDateStatus} 
                 onPeriod={props.onPeriod}
-            />
-            <PeriodHistorySimple 
-                onPeriod={props.onPeriod}
                 overallPeriodStatistics={props.overallPeriodStatistics}
             />
+            {/* <PeriodHistorySimple 
+                onPeriod={props.onPeriod}
+                overallPeriodStatistics={props.overallPeriodStatistics}
+            /> */}
         </View>
     )
 }
@@ -32,6 +35,7 @@ const styles = StyleSheet.create({
         padding: 5,
         display: "flex",
         flexDirection: "column",
+        justifyContent: "space-around",
       },
 })
 

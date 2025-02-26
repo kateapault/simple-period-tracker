@@ -2,34 +2,47 @@ import React from "react";
 import { Text, StyleSheet } from "react-native";
 import { COLORS } from "../../constants";
 
+
 export const AppText = ({children}) => {
     return (
         <Text style={styles.default}>{children}</Text>
     )
 }
 
-export const AppTextBold = ({children}) => {
+export const AppHeaderText = ({children}) => {
     return (
-        <Text style={styles.bold}>{children}</Text>
+        <Text style={styles.headerDefault}>{children}</Text>
     )
 }
 
-export const AppTextItalic = ({children}) => {
+export const AppHeaderTextBold = ({children}) => {
     return (
-        <Text style={styles.italic}>{children}</Text>
+        <Text style={styles.headerBold}>{children}</Text>
+    )
+}
+
+export const AppHeaderTextItalic = ({children}) => {
+    return (
+        <Text style={styles.headerItalic}>{children}</Text>
     )
 }
 
 const styles = StyleSheet.create({
-    default: {
+    headerDefault: {
         fontFamily: 'ArvoRegular',
-        color: COLORS.lightest,
+        color: COLORS.white,
     },
-    bold: {
+    headerBold: {
         fontFamily: 'ArvoBold',
-        color: COLORS.lightpink,
+        color: COLORS.white,
     },
-    italic: {
+    headerItalic: {
         fontFamily: 'ArvoItalic',
-    }
+        color: COLORS.white,
+    },
+    default: {
+        fontFamily: 'AtkinsonHyperlegibleNextRegular',
+        color: COLORS.white,
+    },
+
 })

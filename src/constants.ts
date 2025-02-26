@@ -3,12 +3,16 @@ import { OverallPeriodStatistics } from "./types"
 export const COLORS = {
     // red: 'red',
     // pink: 'pink',
-    darkest: '#330000',
+    // darkred: '#330000',
+    darkred: '#230a13',
     red: '#920317',
     lightred: '#a83545',
     pink: '#be6874',
     lightpink: '#d39aa2',
     lightest: '#e9cdd1',
+    black: 'black',
+    white: '#eed0bc',
+    
 }
 
 export const DATABOX_TAB_TITLES = {
@@ -33,4 +37,24 @@ export const TABLENAMES = {
     periodDates: "periodDates",
     settings: "settings",
     predictedStatus: "predictedPeriodDates",
+}
+
+
+export const DAYOFWEEK = {
+    0: 'Sunday',
+    1: 'Monday',
+    2: 'Tuesday',
+    3: 'Wednesday',
+    4: 'Thursday',
+    5: 'Friday',
+    6: 'Saturday',
+}
+
+export const BUTTONTYPES = {
+    block: 'block',
+    confirm: 'confirm',
+    cancel: 'cancel',
+    neutralLight: 'neutralLight',
+    neutralDark: 'neutralDark',
+    red: 'red',
 }

@@ -1,13 +1,16 @@
 import dayjs, {Dayjs} from "dayjs";
 
 import { ISODateString } from "../types";
+import { DAYOFWEEK } from '../constants';
 
 export const formatDateAsISOString = (date: Dayjs) => {
     // ISO | YYYY-MM-DD
-    const isoString = date.format();
-    return isoString.split('T')[0]
+    return date.format('YYYY-MM-DD')
 }
 
+export const formatDateAsTitleString = (date: Dayjs) => {
+    return date.format('dddd, MMMM D')
+}
 
 export const convertISOStringToDate = (isostr: ISODateString) => {
     const customParseFormat = require("dayjs/plugin/customParseFormat");

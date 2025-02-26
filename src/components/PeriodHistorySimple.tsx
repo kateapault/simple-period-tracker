@@ -4,6 +4,7 @@ import { Dayjs } from 'dayjs';
 
 import { getAllPeriodDateEntries } from '../services/dbService';
 import { PeriodDateEntry, ISODateString, OverallPeriodStatistics } from '../types';
+import { AppText } from './elements/AppText';
 
 type EntryProps = {
     status: string,
@@ -38,18 +39,16 @@ const PeriodHistorySimple = (props: PeriodHistorySimpleProps) => {
 
     return (
         <View style={styles.container}>
-            <Text>Quick Stats</Text>
-            <Text>On average about {props.overallPeriodStatistics?.averageDaysBetweenPeriodStarts} days between the start of your periods</Text>
-            <Text>{props.overallPeriodStatistics?.lastPeriodStartDate ? `${calculateNextStartDate()} days until your next period probably starts` : `not enough data to predict next period start`}</Text>
-            <Text>{props.onPeriod ? `${calculateEndDate()} days left in your period` : ''}</Text>
+            <AppText>Quick Stats</AppText>
+            <AppText>On average about {props.overallPeriodStatistics?.averageDaysBetweenPeriodStarts} days between the start of your periods</AppText>
+            <AppText>{props.overallPeriodStatistics?.lastPeriodStartDate ? `${calculateNextStartDate()} days until your next period probably starts` : `not enough data to predict next period start`}</AppText>
+            <AppText>{props.onPeriod ? `${calculateEndDate()} days left in your period` : ''}</AppText>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        borderColor: "red",
-        borderWidth: 1,
         flex: 1,
     },
 })

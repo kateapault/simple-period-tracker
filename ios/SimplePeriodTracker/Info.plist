@@ -52,6 +52,10 @@
 		<string>ArvoBold.ttf</string>
 		<string>ArvoItalic.ttf</string>
 		<string>ArvoRegular.ttf</string>
+		<string>AtkinsonHyperlegibleNextBold.ttf</string>
+		<string>AtkinsonHyperlegibleNextItalic.ttf</string>
+		<string>AtkinsonHyperlegibleNextRegular.ttf</string>
+		<string>AtkinsonHyperlegibleNextSemiBold.ttf</string>
 	</array>
 </dict>
 </plist>

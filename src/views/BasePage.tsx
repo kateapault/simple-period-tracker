@@ -114,8 +114,7 @@ const styles = StyleSheet.create({
     container: {
       height: "100%",
       alignContent: "space-between",
-      backgroundColor: COLORS.darkest,
-      color: COLORS.lightest,
+      backgroundColor: 'white',
     },
 });
 

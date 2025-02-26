@@ -3,9 +3,11 @@ import {StyleSheet, Text, View, Button,} from 'react-native';
 import { Calendar, CalendarList, DateData } from 'react-native-calendars';
 import dayjs from 'dayjs';
 
-import { COLORS } from '../constants';
+import { COLORS, BUTTONTYPES } from '../constants';
 import { PeriodDateEntry, CalendarEntry, ISODateString, PeriodDateUpdate, PredictedPeriodDateEntry } from '../types';
 import { formatDateAsISOString } from '../utils/utils';
+import { AppText } from './elements/AppText';
+import CustomButton from './elements/CustomButton';
 
 type CalendarViewProps = {
     periodDateEntries: PeriodDateEntry[],
@@ -14,6 +16,7 @@ type CalendarViewProps = {
 }
 
 const CalendarView = (props: CalendarViewProps) => {
+    const [jumpToDate, setJumpToDate] = useState<string | undefined>(formatDateAsISOString(dayjs()))
     const formatEntries = (entries: PeriodDateEntry[] | PredictedPeriodDateEntry[]): CalendarEntry => {
         const formatted: {[k: string]: any} = {}
         if (entries?.length > 0) {
@@ -54,9 +57,14 @@ const CalendarView = (props: CalendarViewProps) => {
                 markedDates={{...formatEntries(props.periodDateEntries), ...formatEntries(props.predictedPeriodDates)}}
                 onDayPress={handleDatePress}
                 maxDate={formatDateAsISOString(dayjs())}
+                initialDate={jumpToDate}
             />
             <View>
-
+                <CustomButton 
+                    type={BUTTONTYPES.neutralLight}
+                    title={'Jump to Current Month'}
+                    onPress={()=>{setJumpToDate(undefined);setJumpToDate(formatDateAsISOString(dayjs()))}}
+                />
             </View>
         </View>
     )
