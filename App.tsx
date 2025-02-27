@@ -27,16 +27,20 @@ import {
 //
 import BasePage from './src/views/BasePage';
 import {DB} from '@op-engineering/op-sqlite';
-import { db } from './src/services/dbService';
+import { opendb } from './src/services/dbService';
 import { createTables, getAllPeriodDateEntries } from './src/services/dbService';
 
 function App(): React.JSX.Element {
-  const startUp = async (db: DB) => {
+  const [db, setDb] = useState<DB>()
+
+  const startUp = async () => {
+    const db = await opendb('mydata.sqlite','db',true)
     await createTables(db);
+    setDb(db);
   }
 
   useEffect(() => {
-    startUp(db);
+    startUp();
     return () => {}
   },[])
 

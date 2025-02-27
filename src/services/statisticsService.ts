@@ -51,6 +51,7 @@ export const calculateOverallPeriodStatistics = (formattedPeriodDates: {[key: st
                 totalDaysLength += entry[1]
             }
             lastStartDate = entry[0]
+            console.log(`laststartdate ${lastStartDate}`)
             // console.log(`startdate ${entry[0]} | days ${entry[1]} | recorded starts ${recordedStarts} | totaldaysbetween ${totalDaysBetween} | laststartdate ${lastStartDate} | total days length ${totalDaysLength}`)
         })
         const avgDaysBetween = Math.round(totalDaysBetween /  (recordedStarts-1))
