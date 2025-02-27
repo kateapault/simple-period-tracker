@@ -24,6 +24,7 @@ export const formatAsCalendarDateEntries = (entries: PeriodDateEntry[] | Predict
 
 export const getDaysLeftInPeriod = (averagePeriodLength: number, lastStartDate?: Dayjs) => {
     if (lastStartDate) {
+        // -1 because the day the period started is day 1 not day 0
         const endDate = lastStartDate.add(averagePeriodLength-1, 'days')
         return endDate.diff(dayjs(),'days')
     }

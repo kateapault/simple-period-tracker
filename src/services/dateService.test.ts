@@ -63,3 +63,20 @@ test("getDaysLeftTilNextPeriod: period start is overdue", () => {
     expect(getDaysLeftTilNextPeriod(28,dayjs().subtract(29,'days'))).toEqual(-1)
 })
 
+
+// super simple functions but test to prevent >= / <= mixups
+test("getDaysLeftTilNextPeriodText: overdue -> period probably starts today", () => {
+    expect(getDaysLeftTilNextPeriodText(-3)).toEqual('your next period will probably start today')
+})
+
+test("getDaysLeftTilNextPeriodText: today -> period probably starts today", () => {
+    expect(getDaysLeftTilNextPeriodText(0)).toEqual('your next period will probably start today')
+})
+
+test("getDaysLeftTilNextPeriodText: predicted tomorrow -> period probably starts tomorrow", () => {
+    expect(getDaysLeftTilNextPeriodText(1)).toEqual('your next period will probably start tomorrow')
+})
+
+test("getDaysLeftTilNextPeriodText: predicted further out -> period starts in X days", () => {
+    expect(getDaysLeftTilNextPeriodText(10)).toEqual(`your next period will probably start in 10 days`)
+})
