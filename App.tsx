@@ -17,14 +17,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-//
+
 import BasePage from './src/views/BasePage';
 import {DB} from '@op-engineering/op-sqlite';
 import { opendb } from './src/services/dbService';

@@ -23,7 +23,10 @@ export const DATABOX_TAB_TITLES = {
 export const PAGE = {
     HOME: "HOME",
     MYDATA: "MY DATA",
-    ERROR: "Error",
+    CALENDAR: "CALENDAR",
+    STATS: "STATS",
+    ERROR: "ERROR",
+    LOWDATA: "LOWDATA",
 }
 
 

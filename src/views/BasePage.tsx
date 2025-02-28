@@ -14,6 +14,8 @@ import Header from '../components/Header';
 import NavBar from '../components/NavBar';
 import HomePage from './HomePage';
 import MyDataPage from './MyDataPage';
+import StatsPage from './StatsPage';
+import CalendarPage from './CalendarPage';
 
 type BasePageProps = {
     db: DB,
@@ -75,21 +77,15 @@ const BasePage = (props: BasePageProps) => {
 
     
     // TODO where to put settings/info?
-    if (currentPage == PAGE.HOME) {
-        return (
-            <View style={styles.container}>
-                <Header />
+    return (
+        <View style={styles.container}>
+            {(currentPage == PAGE.HOME) &&
                 <HomePage 
                     updatePeriodDateStatus={updatePeriodDateStatus} onPeriod={onPeriod}
                     overallPeriodStatistics={overallStats}
                 />
-                <NavBar navigateTo={(page:string) => setCurrentPage(page)}/>
-            </View>
-        )
-    } else if (currentPage == PAGE.MYDATA) {
-        return (
-            <View style={styles.container}>
-                <Header />
+            }
+            { (currentPage == PAGE.MYDATA) && 
                 <MyDataPage 
                     periodDateEntries={periodDateEntries} 
                     updatePeriodDateStatus={updatePeriodDateStatus}
@@ -97,9 +93,19 @@ const BasePage = (props: BasePageProps) => {
                     deleteAllPeriodData={deleteAllPeriodData}
                     calendarEntries={calendarEntries}
                 />
-                <NavBar navigateTo={(page:string) => setCurrentPage(page)}/>
-            </View>
-        )
+            }
+            {
+                currentPage == PAGE.CALENDAR && 
+                <CalendarPage />
+
+            }
+            {
+                currentPage == PAGE.STATS &&
+                <StatsPage />
+            }
+            <NavBar navigateTo={(page:string) => setCurrentPage(page)} selectedPage={currentPage}/>
+        </View>
+    )
     // } else {
     //     // just return home or error page for this...?
     //     return (
@@ -109,8 +115,8 @@ const BasePage = (props: BasePageProps) => {
     //             <NavBar navigateTo={(page:string) => setCurrentPage(PAGE.HOME)}/>
     //         </View>
     //     )
-    }
 }
+
 
 const styles = StyleSheet.create({
     container: {

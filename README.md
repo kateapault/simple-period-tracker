@@ -4,6 +4,7 @@
 - 😊 [op-sqlite](https://github.com/OP-Engineering/op-sqlite#readme)
 - 😊 [react-native-calendars](https://github.com/wix/react-native-calendars#readme)
 - 😊 [react-native-pciker](and see most recent period dates on home screen)
+#### Uicons by <a href="https://www.flaticon.com/uicons">Flaticon</a>
 
 
 ## What
@@ -32,8 +33,7 @@ Please feel free to request/submit features. This first version is built around 
 
 #### V0.3
 [x] Add data wipe
-[] add ability to transfer data to new device (may bump this out if it turns out to be v complicated)
-[] switch to encrypted db
+[x] switch to encrypted db
 [] add unit tests
 
 #### Concurrently: conducting user interviews and recruiting test users

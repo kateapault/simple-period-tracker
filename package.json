@@ -12,6 +12,8 @@
   "dependencies": {
     "@op-engineering/op-sqlite": "^11.4.7",
     "@react-native-picker/picker": "^2.11.0",
+    "@react-native-vector-icons/common": "^11.0.0",
+    "@react-native-vector-icons/material-design-icons": "^7.4.47",
     "dayjs": "^1.11.13",
     "react": "19.0.0",
     "react-native": "0.78.0",

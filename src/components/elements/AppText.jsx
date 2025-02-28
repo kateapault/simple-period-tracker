@@ -9,6 +9,12 @@ export const AppText = ({children}) => {
     )
 }
 
+export const AppTextBold = ({children}) => {
+    return (
+        <Text style={styles.bold}>{children}</Text>
+    )
+}
+
 export const AppHeaderText = ({children}) => {
     return (
         <Text style={styles.headerDefault}>{children}</Text>
