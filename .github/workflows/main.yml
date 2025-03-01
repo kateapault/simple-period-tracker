@@ -16,7 +16,7 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/set-up-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 'v18.20.7'
       - run: npm install
