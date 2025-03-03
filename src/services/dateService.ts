@@ -39,8 +39,11 @@ export const getDaysLeftInPeriodText = (diff: number) => {
 
 export const getDaysLeftTilNextPeriod = (averageDaysBetweenStarts: number, lastStartDate?: Dayjs) => {
     if (lastStartDate) {
-        const nextDate = lastStartDate.add(averageDaysBetweenStarts,'days')
-        return nextDate.diff(dayjs(),'days')
+        const nextDate = lastStartDate.add(averageDaysBetweenStarts,'day')
+        const diff = nextDate.diff(dayjs(),'day')
+        console.log(`diff days til next ${diff}`)
+        console.log(`diff days til next evald ${nextDate.diff(dayjs(),'days')}`)
+        return diff
     }
     return 0
 }

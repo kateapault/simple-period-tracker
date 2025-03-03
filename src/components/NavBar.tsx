@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
         textAlignVertical: "center",
         height: "100%",
         width: "100%",
-        fontSize: 12,
+        fontSize: 14,
         color: COLORS.darkred,
     },
 })

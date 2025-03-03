@@ -35,33 +35,38 @@ test("formatAsCalendarDateEntries: Formats PredictedPeriodDateEntry as CalendarD
 
 test("getDaysLeftInPeriod: period should end in 3 days", () => {
     // period usually lasts 4 days; started today
-    expect(getDaysLeftInPeriod(4,dayjs())).toEqual(3)
+    expect(getDaysLeftInPeriod(4,dayjs().add(1,'second'))).toEqual(3)
 })
 
 test("getDaysLeftInPeriod: avg length period should end today", () => {
     // period usually lasts 4 days; started 3 days ago
-    expect(getDaysLeftInPeriod(4,dayjs().subtract(3,'days'))).toEqual(0)
+    expect(getDaysLeftInPeriod(4,dayjs().subtract(3,'days').add(1,'second'))).toEqual(0)
 })
 
 test("getDaysLeftInPeriod: period lasting longer than average", () => {
     // period usually lasts 4 days; started 4 days ago
-    expect(getDaysLeftInPeriod(4,dayjs().subtract(4,'days'))).toEqual(-1)
+    expect(getDaysLeftInPeriod(4,dayjs().subtract(4,'days').subtract(1,'second'))).toEqual(-1)
 })
 
 
 // getDaysLeftTilNextPeriod is called when user is NOT onPeriod
 
 test("getDaysLeftTilNextPeriod: period starts in 14 days", () => {
-    expect(getDaysLeftTilNextPeriod(28,dayjs().subtract(14,'days'))).toEqual(14)
+    const daysTil = getDaysLeftTilNextPeriod(28,dayjs().subtract(14,'days').add(1,'second'))
+    console.log(`daysTil should be 14, is ${daysTil}`)
+    expect(daysTil).toEqual(14)
 })
 
 test("getDaysLeftTilNextPeriod: period starts tomorrow", () => {
-    expect(getDaysLeftTilNextPeriod(28,dayjs().subtract(27,'days'))).toEqual(1)
+    const daysTil = getDaysLeftTilNextPeriod(28,dayjs().subtract(27,'days').add(1,'second'))
+    console.log(`daysTil should be 1, is ${daysTil}`)
+    expect(daysTil).toEqual(1)
 })
 
 test("getDaysLeftTilNextPeriod: period start is overdue", () => {
-    expect(getDaysLeftTilNextPeriod(28,dayjs().subtract(29,'days'))).toEqual(-1)
+    expect(getDaysLeftTilNextPeriod(28,dayjs().subtract(29,'days').subtract(1,'second'))).toEqual(-1)
 })
+
 
 
 // super simple functions but test to prevent >= / <= mixups

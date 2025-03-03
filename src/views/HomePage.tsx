@@ -16,15 +16,15 @@ type HomePageProps = {
 const HomePage = (props: HomePageProps) => {
     return (
         <View style={styles.container}>
-            <PeriodStatus 
+            {/* <PeriodStatus 
                 updatePeriodDateStatus={props.updatePeriodDateStatus} 
                 onPeriod={props.onPeriod}
                 overallPeriodStatistics={props.overallPeriodStatistics}
-            />
-            {/* <PeriodHistorySimple 
+            /> */}
+            <PeriodHistorySimple 
                 onPeriod={props.onPeriod}
                 overallPeriodStatistics={props.overallPeriodStatistics}
-            /> */}
+            />
         </View>
     )
 }
