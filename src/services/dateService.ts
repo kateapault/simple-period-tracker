@@ -34,7 +34,13 @@ export const getDaysLeftInPeriod = (averagePeriodLength: number, lastStartDate?:
 
 export const getDaysLeftInPeriodText = (diff: number) => {
     console.log(`daysleftin: ${diff}`)
-    return (diff > 0) ? `about ${diff} days left` : `today is probably the last day`
+    if (diff <= 0) {
+        return 'likely the last day'
+    } else if (diff == 1) {
+        return 'about 1 day left'
+    } else {
+        return `about ${diff} days left`
+    }
 }
 
 export const getDaysLeftTilNextPeriod = (averageDaysBetweenStarts: number, lastStartDate?: Dayjs) => {
@@ -51,10 +57,10 @@ export const getDaysLeftTilNextPeriod = (averageDaysBetweenStarts: number, lastS
 export const getDaysLeftTilNextPeriodText = (diff: number) => {
     console.log(`tilnext diff ${diff}`)
     if (diff <= 0) {
-        return `your next period will probably start today`
+        return `(your next period will probably start today)`
     } else if (diff == 1) {
-        return `your next period will probably start tomorrow`
+        return `(your next period will probably start tomorrow)`
     } else {
-        return `your next period will probably start in ${diff} days`
+        return `(your next period will probably start in ${diff} days)`
     }
 }

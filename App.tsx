@@ -38,7 +38,7 @@ function App(): React.JSX.Element {
   },[])
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <BasePage db={db} />
     </SafeAreaView>
   );
@@ -46,9 +46,9 @@ function App(): React.JSX.Element {
 //
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container: {
+    marginTop: StatusBar.currentHeight,
+    marginBottom: StatusBar.currentHeight,
   },
   sectionTitle: {
     fontSize: 24,

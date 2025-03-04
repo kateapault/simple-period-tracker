@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View, Button, Modal,} from 'react-native';
+import {StyleSheet, View,} from 'react-native';
 import { DB } from '@op-engineering/op-sqlite';
 import dayjs from 'dayjs';
 
@@ -81,8 +81,10 @@ const BasePage = (props: BasePageProps) => {
         <View style={styles.container}>
             {(currentPage == PAGE.HOME) &&
                 <HomePage 
-                    updatePeriodDateStatus={updatePeriodDateStatus} onPeriod={onPeriod}
+                    updatePeriodDateStatus={updatePeriodDateStatus} 
+                    onPeriod={onPeriod}
                     overallPeriodStatistics={overallStats}
+                    nextPredictedPeriodDate={predictedPeriodDates[0] ? predictedPeriodDates[0].date : dayjs()}
                 />
             }
             { (currentPage == PAGE.MYDATA) && 
@@ -122,7 +124,7 @@ const styles = StyleSheet.create({
     container: {
       height: "100%",
       alignContent: "space-between",
-      backgroundColor: COLORS.lightpink,
+      backgroundColor: COLORS.grey,
     },
 });
 

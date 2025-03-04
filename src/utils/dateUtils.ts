@@ -8,7 +8,7 @@ export const formatDateAsISOString = (date: Dayjs) => {
 }
 
 export const formatDateAsTitleString = (date: Dayjs) => {
-    return date.format('dddd, MMMM D')
+    return date.format('ddd, M/D')
 }
 
 export const convertISOStringToDate = (isostr: ISODateString) => {

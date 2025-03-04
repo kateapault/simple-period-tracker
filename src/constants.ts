@@ -12,7 +12,11 @@ export const COLORS = {
     lightest: '#e9cdd1',
     black: 'black',
     white: '#eed0bc',
-    
+    lightestpurple: "#dec9e9",
+    lightpurple: '#c77dff',
+    darkpurple: '#10002b',
+    grey: '#ddc9c9',
+    accent: '#bf7c7c',
 }
 
 export const DATABOX_TAB_TITLES = {

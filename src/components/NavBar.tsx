@@ -76,25 +76,27 @@ const NavBar = (props: NavBarProps) => {
 
 const styles = StyleSheet.create({
     container: {
-        height: 30,
+        // height: 30,
         flex: 1,
+        display: "flex",
         flexDirection: "row",
     },
     navButton: {
         flex: 1,
         justifyContent: "center",
-        backgroundColor: COLORS.white,
+        backgroundColor: COLORS.darkred,
         display: "flex",
         flexDirection: "column",
         alignContent: "center",
+        paddingTop: 10,
     },
     navButtonLabel: {
         textAlign: "center",
         textAlignVertical: "center",
         height: "100%",
         width: "100%",
-        fontSize: 14,
-        color: COLORS.darkred,
+        fontSize: 15,
+        color: COLORS.lightest,
     },
 })
 

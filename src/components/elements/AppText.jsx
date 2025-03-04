@@ -36,23 +36,23 @@ export const AppHeaderTextItalic = ({children}) => {
 const styles = StyleSheet.create({
     headerDefault: {
         fontFamily: 'ArvoRegular',
-        color: COLORS.white,
+        color: COLORS.darkred,
     },
     headerBold: {
         fontFamily: 'ArvoBold',
-        color: COLORS.white,
+        color: COLORS.darkred,
     },
     headerItalic: {
         fontFamily: 'ArvoItalic',
-        color: COLORS.white,
+        color: COLORS.darkred,
     },
     default: {
         fontFamily: 'AtkinsonHyperlegibleNextRegular',
-        color: COLORS.white,
+        color: COLORS.darkred,
     },
     bold: {
         fontFamily: 'AtkinsonHyperlegibleNextBold',
-        color: COLORS.white,
+        color: COLORS.darkred,
     }
 
 })

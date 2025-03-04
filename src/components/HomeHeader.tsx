@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     }, 
     headerText: {
-        fontSize: 20,
-        color: COLORS.red
+        fontSize: 24,
+        color: COLORS.darkred
     },
 })
 

@@ -103,9 +103,12 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: "black",
         borderRadius: 8,
+        width: "40%",
     },
     cancelText: {
         color: 'black',
+        textAlign: "center",
+        fontSize: 18,
     },
     neutralLight: {
         padding: 12,
@@ -129,13 +132,16 @@ const styles = StyleSheet.create({
     },
     red: {
         padding: 12,
-        backgroundColor: COLORS.pink,
+        backgroundColor: COLORS.lightred,
         borderWidth: 2,
         borderColor: COLORS.darkred,
         borderRadius: 8,
+        width: "40%",
     },
     redText: {
-        color: COLORS.darkred,
+        color: COLORS.lightest,
+        textAlign: "center",
+        fontSize: 18,
     },
 })
 

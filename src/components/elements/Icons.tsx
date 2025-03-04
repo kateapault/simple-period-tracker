@@ -9,8 +9,7 @@ type IconProps = {
 }
 
 const ICONSIZE = 30;
-const COLOR = COLORS.darkred;
-const INVERSE_COLOR = COLORS.white;
+const COLOR = COLORS.lightest;
 
 export const HomeIcon = (props: IconProps) => {
     return <Icon style={styles.icon} name={props.selected ? 'home' : 'home-outline'} size={ICONSIZE} color={COLOR} />
@@ -29,7 +28,7 @@ export const CalendarIcon = (props: IconProps) => {
 }
 
 export const SelectedIcon = (props: IconProps) => {
-    return <Icon style={styles.icon} name={'color-helper'} size={(ICONSIZE/2)} color={props.selected ? COLOR : COLORS.white}/>
+    return <Icon style={styles.icon} name={'color-helper'} size={(ICONSIZE/2)} color={props.selected ? COLOR : COLORS.darkred}/>
 }
 
 const styles = StyleSheet.create({

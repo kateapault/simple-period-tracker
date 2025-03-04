@@ -5,7 +5,7 @@ import dayjs, {Dayjs} from 'dayjs';
 import { getDaysLeftInPeriod, getDaysLeftInPeriodText, getDaysLeftTilNextPeriod, getDaysLeftTilNextPeriodText } from '../services/dateService';
 import { ISODateString, OverallPeriodStatistics, PeriodDateEntry, PeriodDateUpdate } from '../types';
 import { formatDateAsISOString } from '../utils/dateUtils';
-import { AppHeaderText, AppText } from './elements/AppText';
+import { AppHeaderText, AppText, AppTextBold } from './elements/AppText';
 import CustomButton from './elements/CustomButton';
 import { COLORS, BUTTONTYPES } from '../constants';
 import HomeHeader from './HomeHeader';
@@ -22,40 +22,30 @@ const PeriodStatus = (props: PeriodStatusProps) => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.bubble}>
-                <HomeHeader />
-                <View style={styles.textblock}>
-                    <Text style={props.onPeriod ? styles.onPeriod : styles.offPeriod}>🩸</Text>
-                    <Text style={styles.blurb}>
-                        <AppText>
-                            <Text style={props.onPeriod ? styles.onPeriodText : styles.offPeriodText}>
-                                You are {props.onPeriod ? "on" : "not on"} your period
-                            </Text>
-                        </AppText>
+            <View style={styles.textgroup}>
+                {/* <AppText>
+                    <Text style={styles.text}>
+                        Today is {dayjs().format('ddd, M/D')}
                     </Text>
-                </View>
+                </AppText> */}
+                <AppTextBold>
+                    <Text style={styles.text}>
+                        {props.onPeriod ? 'Started on' : 'Last started'}
+                    </Text>
+                </AppTextBold>
                 <AppText>
-                    <Text style={styles.headsUp}>{props.onPeriod ? 
-                        getDaysLeftInPeriodText(getDaysLeftInPeriod(
-                            props.overallPeriodStatistics.averagePeriodLength,
-                            props.overallPeriodStatistics.lastPeriodStartDate,
-                        )) : 
-                        getDaysLeftTilNextPeriodText(getDaysLeftTilNextPeriod(
-                            props.overallPeriodStatistics.averageDaysBetweenPeriodStarts,
-                            props.overallPeriodStatistics.lastPeriodStartDate,
-                        ))}</Text>
+                    <Text style={styles.text}>
+                        {props.overallPeriodStatistics.lastPeriodStartDate?.format('ddd M/D')}
+                    </Text>
                 </AppText>
-                <CustomButton
-                    type={props.onPeriod ? BUTTONTYPES.cancel : BUTTONTYPES.red}
-                    onPress={async () => {props.updatePeriodDateStatus(
-                        // takes PeriodDateUpdate
-                        {
-                            status: !props.onPeriod,
-                            date: formatDateAsISOString(dayjs()),
-                        }
-                    )}}
-                    title={props.onPeriod ? "It stopped": "It started"}
-                />
+                <AppText>
+                    <Text style={props.onPeriod ? styles.headsUp : styles.hidden}>{props.onPeriod ? 
+                    getDaysLeftInPeriodText(getDaysLeftInPeriod(
+                        props.overallPeriodStatistics.averagePeriodLength,
+                        props.overallPeriodStatistics.lastPeriodStartDate,
+                    )) : 
+                    '.'}</Text>
+                </AppText>
             </View>
         </View>
     )
@@ -65,30 +55,33 @@ const PeriodStatus = (props: PeriodStatusProps) => {
 const styles = StyleSheet.create({
     container: {
       color: "darkgrey",
-      flex: 2,
+      flex: 0.9,
     //   backgroundColor: COLORS.white,
       display: "flex",
-      alignItems: "center",
-      justifyContent: "space-around",
+      justifyContent: "center",
     },
     bubble: {
-        borderWidth: 1,
-        borderRadius: 40,
-        borderColor: COLORS.lightpink,
-        backgroundColor: 'white',
-        width: "80%",
-        aspectRatio: "8/7",
+        // width: "72%",
+        height: "64%",
         display: "flex",
-        alignItems: "center",
+        alignItems: "flex-start",
         justifyContent: "space-evenly",
-        marginTop: "-50%",
+    },
+    block: {
+        display: "flex",
+        flexDirection: "row",
+    },
+    textgroup: {
+        display: "flex",
+        alignContent: "flex-start",
+        justifyContent: "center",
     },
     textblock: {
         width: "100%",
         display: "flex",
         flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
+        alignContent: "center",
+        justifyContent: "flex-start",
         // marginLeft: -24,
     },
     button: {
@@ -96,29 +89,32 @@ const styles = StyleSheet.create({
         backgroundColor: "purple",
     },
     onPeriod: {
-        fontSize: 84,
+        fontSize: 60,
     },
     offPeriod: {
-        fontSize: 84,
+        fontSize: 60,
         filter: "grayscale(100%)",
     },
     blurb: {
         fontSize: 20,
         flex: 0.5,
         flexWrap: "wrap",
-        textAlign: "center",
+        textAlign: "left",
         color: COLORS.darkred,
+        paddingLeft: 4,
     },
-    onPeriodText: {
-        color: COLORS.red,
-    },
-    offPeriodText: {
+    text: {
         color: COLORS.darkred,
+        fontSize: 36,
     },
     headsUp: {
-        fontSize: 12,
-        color: COLORS.black,
+        fontSize: 24,
+        color: COLORS.darkred,
     },
+    hidden: {
+        fontSize: 24,
+        color: COLORS.lightest,
+    }
   })
 
 export default PeriodStatus;
