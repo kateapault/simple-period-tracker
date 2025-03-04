@@ -1,17 +1,21 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, Button,} from 'react-native';
+import {StyleSheet, Text, View, Button, TouchableOpacity,} from 'react-native';
 
-import { PAGE } from '../constants';
+import { HomeIcon, StatsIcon, DataIcon, CalendarIcon, SelectedIcon } from './elements/Icons';
+import { PAGE, COLORS } from '../constants';
+import { AppText, AppTextBold } from './elements/AppText';
 
 type NavBarProps = {
     navigateTo: Function,
+    selectedPage: string,
 }
 
 type NavBarButtonProps = {
     label: string,
     navigateTo: Function,
+    icon: React.JSX.Element,
+    selectedPage: string,
 }
-
 
 const NavBarButton = (props: NavBarButtonProps) => {
     const pressed = () => {
@@ -19,9 +23,23 @@ const NavBarButton = (props: NavBarButtonProps) => {
     }
 
     return (
-        <View style={styles.navButton}>
-            <Text style={styles.navButtonLabel} onPress={()=>{pressed()}}>{props.label}</Text>
-        </View>
+        <TouchableOpacity style={styles.navButton} onPress={()=>{pressed()}}>
+            { props.icon }
+            {
+                props.label == props.selectedPage
+                ? <AppTextBold>
+                    <Text style={styles.navButtonLabel}>
+                        { props.label }
+                    </Text>
+                </AppTextBold>
+                : <AppText>
+                    <Text style={styles.navButtonLabel}>
+                            { props.label }
+                    </Text>
+                </AppText>
+            }
+            <SelectedIcon selected={props.selectedPage == props.label} />
+        </TouchableOpacity>
     )
 }
 
@@ -29,31 +47,56 @@ const NavBar = (props: NavBarProps) => {
 
     return (
         <View style={styles.container}>
-            <NavBarButton label={PAGE.HOME} navigateTo={props.navigateTo}/>
-            <NavBarButton label={PAGE.MYDATA} navigateTo={props.navigateTo}/>
+            <NavBarButton 
+                label={PAGE.HOME} 
+                navigateTo={props.navigateTo} 
+                icon={<HomeIcon selected={PAGE.HOME == props.selectedPage}/>}
+                selectedPage={props.selectedPage}/>
+            <NavBarButton 
+                label={PAGE.MYDATA} 
+                navigateTo={props.navigateTo} 
+                icon={<DataIcon selected={PAGE.MYDATA == props.selectedPage}/>}
+                selectedPage={props.selectedPage}
+            />
+            <NavBarButton 
+                label={PAGE.CALENDAR} 
+                navigateTo={props.navigateTo} 
+                icon={<CalendarIcon selected={PAGE.CALENDAR == props.selectedPage}/>}
+                selectedPage={props.selectedPage}
+            />
+            <NavBarButton 
+                label={PAGE.STATS} 
+                navigateTo={props.navigateTo} 
+                icon={<StatsIcon selected={PAGE.STATS == props.selectedPage}/>}
+                selectedPage={props.selectedPage}
+            />
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        height: 30,
-        borderColor: "green",
-        borderWidth: 1,
+        // height: 30,
         flex: 1,
+        display: "flex",
         flexDirection: "row",
     },
     navButton: {
         flex: 1,
-        borderColor: "green",
-        borderWidth: 2,
         justifyContent: "center",
+        backgroundColor: COLORS.darkred,
+        display: "flex",
+        flexDirection: "column",
+        alignContent: "center",
+        paddingTop: 10,
     },
     navButtonLabel: {
         textAlign: "center",
         textAlignVertical: "center",
         height: "100%",
         width: "100%",
+        fontSize: 15,
+        color: COLORS.lightest,
     },
 })
 

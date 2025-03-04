@@ -11,9 +11,15 @@
   },
   "dependencies": {
     "@op-engineering/op-sqlite": "^11.4.7",
+    "@react-native-picker/picker": "^2.11.0",
+    "@react-native-vector-icons/common": "^11.0.0",
+    "@react-native-vector-icons/material-design-icons": "^7.4.47",
+    "dayjs": "^1.11.13",
     "react": "19.0.0",
     "react-native": "0.78.0",
-    "react-native-calendars": "^1.1309.1"
+    "react-native-calendars": "^1.1309.1",
+    "react-native-keychain": "^9.2.3",
+    "react-native-securerandom": "^1.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

@@ -1,11 +1,16 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, Button,} from 'react-native';
 
+import {AppHeaderText, AppHeaderTextBold} from './elements/AppText';
+import { COLORS } from '../constants';
+
 const Header = () => {
 
     return (
         <View style={styles.container}>
-            <Text>SimplePeriodTracker</Text>
+            <Text style={styles.header}>
+                <AppHeaderTextBold><Text style={styles.emphasis}>Simple</Text></AppHeaderTextBold><AppHeaderText>PeriodTracker</AppHeaderText>
+            </Text>
         </View>
     )
 }
@@ -13,15 +18,20 @@ const Header = () => {
 const styles = StyleSheet.create({
     container: {
         height: 30,
-        borderColor: "blue",
+        borderBottomColor: COLORS.lightpink,
         borderWidth: 1,
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
+        display: "flex",
+        flexDirection: "row",
+        backgroundColor: COLORS.darkred,
     },
-
-    bolded: {
-        fontWeight: "bold",
+    header: {
+        fontSize: 24,
+    },
+    emphasis: {
+        color: COLORS.pink,
     }
 })
 
