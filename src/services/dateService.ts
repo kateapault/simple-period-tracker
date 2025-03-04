@@ -57,10 +57,10 @@ export const getDaysLeftTilNextPeriod = (averageDaysBetweenStarts: number, lastS
 export const getDaysLeftTilNextPeriodText = (diff: number) => {
     console.log(`tilnext diff ${diff}`)
     if (diff <= 0) {
-        return `(your next period will probably start today)`
+        return `your next period will probably start today`
     } else if (diff == 1) {
-        return `(your next period will probably start tomorrow)`
+        return `your next period will probably start tomorrow`
     } else {
-        return `(your next period will probably start in ${diff} days)`
+        return `your next period will probably start in ${diff} days`
     }
 }
