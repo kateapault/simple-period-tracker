@@ -43,24 +43,24 @@ Please feel free to request/submit features. This first version is built around 
 #### Concurrently with V0.4: conducting user interviews and recruiting test users
 
 #### V0.4
--[] Make algorithm more accurate
--[] edit date handling to fix <24h = 0 days behavior
--[] add component tests
+-[ ] Make algorithm more accurate
+-[ ] edit date handling to fix <24h = 0 days behavior
+-[ ] add component tests
 
 #### V0.6
--[] add accessibility features (for vision impaired & make compatible with screen reader
--[] also look up what other accessibility features are out there)
--[] styling
+-[ ] add accessibility features (for vision impaired & make compatible with screen reader
+-[ ] also look up what other accessibility features are out there)
+-[ ] styling
 
 #### V0.7 
--[] add ability to add custom tracker (up to 2? 3?)
--[] add other features from user interviews / user feedback
--[] Bulk add dates ?
--[] add visual customization options
+-[ ] add ability to add custom tracker (up to 2? 3?)
+-[ ] add other features from user interviews / user feedback
+-[ ] Bulk add dates ?
+-[ ] add visual customization options
 placeholder for anything else that needs doing that I'm forgetting rn
 
 #### V0.8
--[] package & upload to Google Play & Apple Store for test users to try
+-[ ] package & upload to Google Play & Apple Store for test users to try
 
 #### v0.0
 placeholder - fix anything test users call out
