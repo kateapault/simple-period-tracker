@@ -1,5 +1,8 @@
 # Simple Period Tracker
 
+### Current Status: User Interviews 
+[Here's the survey](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://oblador.github.io/react-native-vector-icons/&ved=2ahUKEwiYk6Wfue-LAxWfM1kFHWicAn8QFnoECAkQAQ&usg=AOvVaw2wrRHIDlA6X57qCArk1N2I) if you'd like to give your input!
+
 ## What
 This is a simple, privacy-focused period tracker that stores your data locally and is usable offline.
 
@@ -21,46 +24,53 @@ Please feel free to request/submit features. This first version is built around 
 - 😊 [react-native-vector-icons](https://oblador.github.io/react-native-vector-icons#readme)
 
 
+### Built with React Native and these libraries <3
+- 😊 [op-sqlite](https://github.com/OP-Engineering/op-sqlite#readme)
+- 😊 [react-native-calendars](https://github.com/wix/react-native-calendars#readme)
+- 😊 [react-native-vector-icons](https://oblador.github.io/react-native-vector-icons#readme)
+
+
 ## Roadmap
 ### (Will be updated as I go)
 #### V0.1
-- [x] Basic app wireframe
-- [x] add period start
-- [x] add period stop
-- [x] see period history in calendar view 
+[x] Basic app wireframe
+[x] add period start
+[x] add period stop
+[x] see period history in calendar view 
 
 #### V0.2
-- [x] Edit past dates in calendar
-- [x] add simple predictive algorithm
-- [x] show predicted period dates on calendar view 
-- [x] show next predicted start and stop on home screen
+[x] Edit past dates in calendar
+[x] add simple predictive algorithm
+[x] show predicted period dates on calendar view 
+[x] show next predicted start and stop on home screen
 
 #### V0.3
-- [x] Add data wipe
-- [x] switch to encrypted db
-- [x] add unit tests
+[x] Add data wipe
+[x] switch to encrypted db
+[x] add unit tests
+
 
 #### Concurrently with V0.4: conducting user interviews and recruiting test users
 
 #### V0.4
-- [ ] Make algorithm more accurate
-- [ ] edit date handling to fix <24h = 0 days behavior
-- [ ] add component tests
+[] Make algorithm more accurate
+[] edit date handling to fix <24h = 0 days behavior
+[] add component tests
 
 #### V0.6
-- [ ] add accessibility features (for vision impaired & make compatible with screen reader
-- [ ] also look up what other accessibility features are out there)
-- [ ] styling
+[] add accessibility features (for vision impaired & make compatible with screen reader
+[] also look up what other accessibility features are out there)
+[] styling
 
 #### V0.7 
-- [ ] add ability to add custom tracker (up to 2? 3?)
-- [ ] add other features from user interviews / user feedback
-- [ ] Bulk add dates ?
-- [ ] add visual customization options
+[] add ability to add custom tracker (up to 2? 3?)
+[] add other features from user interviews / user feedback
+[] Bulk add dates ?
+[] add visual customization options
 placeholder for anything else that needs doing that I'm forgetting rn
 
 #### V0.8
-- [ ] package & upload to Google Play & Apple Store for test users to try
+[] package & upload to Google Play & Apple Store for test users to try
 
 #### v0.0
 placeholder - fix anything test users call out

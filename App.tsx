@@ -6,7 +6,6 @@
  */
 
 import React, {useState, useEffect, useCallback} from 'react';
-import type {PropsWithChildren} from 'react';
 import {
   ScrollView,
   StatusBar,
@@ -15,38 +14,41 @@ import {
   useColorScheme,
   View,
   Button,
+  SafeAreaView,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 
 import BasePage from './src/views/BasePage';
-import {open} from '@op-engineering/op-sqlite';
-import { createTables } from './src/services/dbService';
-
-const db = open({name: 'mydatabase.sqlite'}); 
+import {DB} from '@op-engineering/op-sqlite';
+import { opendb } from './src/services/dbService';
+import { createTables, getAllPeriodDateEntries } from './src/services/dbService';
 
 function App(): React.JSX.Element {
-  createTables(db);
+  const [db, setDb] = useState<DB>()
 
-  // useEffect()
+  const startUp = async () => {
+    const db = await opendb('mydata.sqlite','db',true)
+    await createTables(db);
+    setDb(db);
+  }
+
+  useEffect(() => {
+    startUp();
+    return () => {}
+  },[])
 
   return (
-    <View>
-      <BasePage />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <BasePage db={db} />
+    </SafeAreaView>
   );
 }
+//
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container: {
+    marginTop: StatusBar.currentHeight,
+    marginBottom: StatusBar.currentHeight,
   },
   sectionTitle: {
     fontSize: 24,
